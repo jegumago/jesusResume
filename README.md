@@ -15,7 +15,7 @@ This page functions as an interactive technical deck. It includes:
 * **Branch:** `master`
 
 ## Maintenance Workflow
-Whenever you update your portfolio (skills, projects, or metrics), use the following terminal workflow to deploy changes:
+Whenever I update my portfolio (skills, projects, or metrics), use the following terminal workflow to deploy changes:
 
 1. **Navigate to project folder:**
    cd ~/xx/xxxCV1
@@ -32,3 +32,5 @@ Once you have created that file:
    git commit -m ""
    git push origin master
 
+
+I created the shipit function (among some other cool stuff) to avoid doing this add, commit and push located in my .bash_aliases file. Check it out. 
