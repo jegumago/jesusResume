@@ -26,6 +26,7 @@ body {
     overflow-x: hidden;
     line-height: 1.5;
     transition: color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
 }
 
 .main-deck {
@@ -377,7 +378,7 @@ body.high-contrast-mode .glitch-title { color: #0f172a !important; text-shadow: 
     --neon-tertiary: #ff0;
 }
 
-.scene {
+.scene, #scene {
     position: fixed;
     top: 0;
     left: 0;
@@ -385,6 +386,11 @@ body.high-contrast-mode .glitch-title { color: #0f172a !important; text-shadow: 
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    will-change: transform;
+}
+
+.matrix-rain {
+    will-change: transform;
 }
 
 .main-deck, .overlay-screen {
@@ -592,8 +598,8 @@ body.high-contrast-mode {
 
 body.high-contrast-mode .main-deck {
     background: rgba(255, 255, 255, 0.35) !important;
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
     border-radius: 12px !important;
     padding: 35px 40px !important;
     box-shadow: 0 8px 50px rgba(0,0,0,0.6), 0 0 100px rgba(0,0,0,0.3) !important;

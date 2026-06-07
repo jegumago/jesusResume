@@ -14,18 +14,15 @@ if (sceneCanvas) {
     window.addEventListener('resize', resizeCanvas);
 
     class Particle {
-        constructor() {
-            this.reset();
-        }
+        constructor() { this.reset(); }
         reset() {
             this.x = Math.random() * W;
             this.y = Math.random() * H;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.6;
-            this.speedY = (Math.random() - 0.5) * 0.6;
-            this.hue = Math.random() > 0.6 ? 180 : (Math.random() > 0.5 ? 300 : 60);
-            this.opacity = Math.random() * 0.6 + 0.3;
-            this.pulse = Math.random() * Math.PI * 2;
+            this.size = Math.random() * 2.5 + 1;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.hue = Math.random() > 0.5 ? 180 : 300;
+            this.opacity = Math.random() * 0.5 + 0.3;
         }
         update() {
             this.x += this.speedX;
@@ -33,22 +30,16 @@ if (sceneCanvas) {
             if (this.x < 0 || this.x > W) this.speedX *= -1;
             if (this.y < 0 || this.y > H) this.speedY *= -1;
         }
-        draw(time) {
-            this.pulse += 0.03;
-            const glowSize = this.size + Math.sin(this.pulse) * 0.5;
+        draw() {
             ctx.beginPath();
-            ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2);
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fillStyle = `hsla(${this.hue}, 100%, 60%, ${this.opacity})`;
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, glowSize * 2.5, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 100%, 60%, ${this.opacity * 0.15})`;
             ctx.fill();
         }
     }
 
     const particles = [];
-    for (let i = 0; i < 130; i++) {
+    for (let i = 0; i < 70; i++) {
         particles.push(new Particle());
     }
 
@@ -57,15 +48,14 @@ if (sceneCanvas) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
                 const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 180) {
+                const dist = dx * dx + dy * dy;
+                if (dist < 16900) {
+                    const a = 0.12 * (1 - Math.sqrt(dist) / 130);
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    const alpha = 0.15 * (1 - dist / 180);
-                    const hue = particles[i].hue === 180 ? '0, 255, 255' : '255, 0, 255';
-                    ctx.strokeStyle = `rgba(${hue}, ${alpha})`;
-                    ctx.lineWidth = 0.8;
+                    ctx.strokeStyle = particles[i].hue === 180 ? `rgba(0, 255, 255, ${a})` : `rgba(255, 0, 255, ${a})`;
+                    ctx.lineWidth = 0.6;
                     ctx.stroke();
                 }
             }
@@ -73,38 +63,23 @@ if (sceneCanvas) {
     }
 
     let mouseX = W / 2, mouseY = H / 2;
+    let rafId;
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
 
     function animateParticles() {
-        ctx.fillStyle = 'rgba(5, 5, 8, 0.08)';
+        ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
         ctx.fillRect(0, 0, W, H);
-        const time = Date.now();
-        particles.forEach(p => { p.update(); p.draw(time); });
+        particles.forEach(p => { p.update(); p.draw(); });
         connectParticles();
-
-        // Mouse glow ring
-        const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
-        gradient.addColorStop(0, 'rgba(0, 255, 255, 0.08)');
-        gradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.04)');
-        gradient.addColorStop(1, 'rgba(0, 255, 255, 0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(mouseX - 80, mouseY - 80, 160, 160);
-
         ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 40 + Math.sin(time * 0.002) * 5, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 60 + Math.sin(time * 0.003 + 1) * 8, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 0, 255, 0.15)';
+        ctx.arc(mouseX, mouseY, 35, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0, 255, 255, 0.2)';
         ctx.lineWidth = 1;
         ctx.stroke();
-
-        requestAnimationFrame(animateParticles);
+        rafId = requestAnimationFrame(animateParticles);
     }
     animateParticles();
 }
@@ -158,7 +133,7 @@ class MatrixRain {
         if (!this.canvas) return;
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        const cols = Math.floor(this.canvas.width / 14);
+        const cols = Math.floor(this.canvas.width / 20);
         this.drops = [];
         for (let i = 0; i < cols; i++) {
             this.drops[i] = Math.floor(Math.random() * -100);
@@ -183,26 +158,24 @@ class MatrixRain {
 
     animate() {
         if (!this.isRunning) return;
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         for (let i = 0; i < this.drops.length; i++) {
-            const x = i * 14;
-            const y = this.drops[i] * 14;
+            const x = i * 20 + 10;
+            const y = this.drops[i] * 20;
             if (y < 0) continue;
 
             const char = this.chars[Math.floor(Math.random() * this.chars.length)];
-
-            // Leading char (bright white)
             this.ctx.fillStyle = '#fff';
-            this.ctx.font = '14px monospace';
+            this.ctx.font = '18px monospace';
             this.ctx.fillText(char, x, y);
 
-            // Trail (fading green)
-            for (let j = 1; j < 10; j++) {
-                const ty = y - j * 14;
+            // Trail
+            for (let j = 1; j < 6; j++) {
+                const ty = y - j * 20;
                 if (ty < 0) break;
-                const alpha = Math.max(0, 0.7 - j * 0.07);
+                const alpha = Math.max(0, 0.6 - j * 0.1);
                 this.ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
                 this.ctx.fillText(this.chars[Math.floor(Math.random() * this.chars.length)], x, ty);
             }
