@@ -567,10 +567,14 @@ body.high-contrast-mode .mouse-trail { border-color: var(--accent-neon); }
 body.high-contrast-mode .time { color: var(--accent-neon); }
 body.high-contrast-mode .version { color: #94a3b8; }
 
-/* HR mode: strip all green neon glows */
-body.high-contrast-mode .main-title,
-body.high-contrast-mode .main-subtitle,
-body.high-contrast-mode .display-title { text-shadow: none !important; }
+/* HR mode: colors & neon glow cleanup */
+body.high-contrast-mode .main-title { color: var(--accent-neon) !important; text-shadow: none !important; }
+body.high-contrast-mode .main-subtitle { color: #334155 !important; text-shadow: none !important; }
+body.high-contrast-mode .display-title { color: var(--text-bright) !important; text-shadow: none !important; }
+body.high-contrast-mode .deck-header { border-bottom-color: var(--accent-neon) !important; }
+body.high-contrast-mode .btn-control { background: transparent !important; font-weight: 600 !important; }
+body.high-contrast-mode .btn-control:hover { background: var(--accent-neon) !important; color: #ffffff !important; }
+body.high-contrast-mode .btn-danger:hover { background: var(--accent-critical) !important; color: #ffffff !important; }
 body.high-contrast-mode .section-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important; }
 body.high-contrast-mode .section-card:hover { box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08) !important; }
 body.high-contrast-mode .metric-cell { background: #f1f5f9 !important; box-shadow: none !important; }
@@ -587,6 +591,7 @@ body.high-contrast-mode .btn-gate,
 body.high-contrast-mode .btn-control,
 body.high-contrast-mode .btn-skip,
 body.high-contrast-mode .btn-decrypt { border-color: var(--accent-neon) !important; color: var(--accent-neon) !important; }
+body.high-contrast-mode .btn-danger { border-color: var(--accent-critical) !important; color: var(--accent-critical) !important; }
 
 @media (max-width: 600px) {
     .corner { width: 50px; height: 50px; }
