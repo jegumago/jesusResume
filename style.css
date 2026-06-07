@@ -580,16 +580,16 @@ body.high-contrast-mode {
 }
 
 body.high-contrast-mode .main-deck {
-    background: rgba(255, 255, 255, 0.45) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(255, 255, 255, 0.35) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
     border-radius: 12px !important;
     padding: 35px 40px !important;
     box-shadow: 0 8px 50px rgba(0,0,0,0.6), 0 0 100px rgba(0,0,0,0.3) !important;
     margin: 20px auto !important;
     position: relative;
     z-index: 3;
-    color: #1e293b !important;
+    color: #0f172a !important;
 }
 
 /* Header */
@@ -602,32 +602,32 @@ body.high-contrast-mode .deck-header {
     margin-bottom: 25px !important;
 }
 body.high-contrast-mode .main-title {
-    color: #0f172a !important;
+    color: #000000 !important;
     font-size: 2.4rem !important;
     font-weight: 800 !important;
     text-shadow: none !important;
     letter-spacing: -0.5px !important;
 }
 body.high-contrast-mode .main-subtitle {
-    color: #475569 !important;
+    color: #000000 !important;
     font-size: 1.05rem !important;
     font-weight: 500 !important;
     text-shadow: none !important;
     margin: 0 0 8px 0 !important;
 }
-body.high-contrast-mode .contact-meta { font-size: 0.8rem; color: #475569; }
+body.high-contrast-mode .contact-meta { font-size: 0.8rem; color: #000000; }
 body.high-contrast-mode .linkedin-link {
-    color: #2563eb !important;
-    border-color: #2563eb !important;
+    color: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
     font-weight: 600 !important;
     border-radius: 6px !important;
-    background: rgba(37, 99, 235, 0.04) !important;
+    background: rgba(29, 78, 216, 0.06) !important;
     text-shadow: none !important;
 }
 body.high-contrast-mode .linkedin-link:hover {
-    background: #2563eb !important;
+    background: #1d4ed8 !important;
     color: #ffffff !important;
-    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.25) !important;
+    box-shadow: 0 2px 12px rgba(29, 78, 216, 0.25) !important;
     text-shadow: none !important;
 }
 body.high-contrast-mode .control-matrix { align-self: flex-start !important; }
@@ -661,90 +661,90 @@ body.high-contrast-mode .btn-danger:hover {
 
 /* Sections inside white card */
 body.high-contrast-mode .section-card {
-    background: rgba(255, 255, 255, 0.35) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 8px !important;
     padding: 24px !important;
     margin-bottom: 20px !important;
     box-shadow: none !important;
 }
 body.high-contrast-mode .section-card h2 {
-    color: #0f172a !important;
-    border-bottom-color: #e2e8f0 !important;
+    color: #000000 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     font-weight: 700 !important;
     font-size: 1.15rem !important;
     padding-bottom: 12px !important;
 }
-body.high-contrast-mode .section-instruction { color: #64748b !important; }
+body.high-contrast-mode .section-instruction { color: #000000 !important; }
 
 /* Metrics */
 body.high-contrast-mode .metric-cell {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
     border-radius: 6px !important;
 }
 body.high-contrast-mode .metric-cell:hover { border-color: rgba(255, 255, 255, 0.3) !important; }
-body.high-contrast-mode .metric-label { color: #475569 !important; font-weight: 500 !important; }
-body.high-contrast-mode .metric-value { color: #0f172a !important; }
-body.high-contrast-mode .text-accent { color: #0f172a !important; }
-body.high-contrast-mode .text-neon { color: #0f172a !important; }
+body.high-contrast-mode .metric-label { color: #000000 !important; font-weight: 500 !important; }
+body.high-contrast-mode .metric-value { color: #000000 !important; }
+body.high-contrast-mode .text-accent { color: #000000 !important; }
+body.high-contrast-mode .text-neon { color: #000000 !important; }
 
 /* Inventory */
 body.high-contrast-mode .inv-slot {
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    background: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    background: rgba(255, 255, 255, 0.25) !important;
     border-radius: 6px !important;
-    color: #1e293b !important;
+    color: #000000 !important;
     font-weight: 500 !important;
 }
 body.high-contrast-mode .inv-slot:hover {
-    background: rgba(255, 255, 255, 0.4) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
 }
 body.high-contrast-mode .inv-slot.active {
-    border-color: #3b82f6 !important;
-    background: rgba(59, 130, 246, 0.15) !important;
-    color: #3b82f6 !important;
+    border-color: #1d4ed8 !important;
+    background: rgba(29, 78, 216, 0.15) !important;
+    color: #1d4ed8 !important;
 }
 body.high-contrast-mode .inventory-display-pane {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
     border-radius: 6px !important;
 }
-body.high-contrast-mode .display-title { color: #0f172a !important; text-shadow: none !important; font-weight: 700 !important; }
-body.high-contrast-mode .display-meta p { color: #475569 !important; }
-body.high-contrast-mode .pane-divider { border-color: rgba(255, 255, 255, 0.15) !important; }
+body.high-contrast-mode .display-title { color: #000000 !important; text-shadow: none !important; font-weight: 700 !important; }
+body.high-contrast-mode .display-meta p { color: #000000 !important; }
+body.high-contrast-mode .pane-divider { border-color: rgba(255, 255, 255, 0.12) !important; }
 
 /* Experience */
 body.high-contrast-mode .terminal-experience-box {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    border-left-color: #3b82f6 !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    border-left-color: #1d4ed8 !important;
     border-radius: 6px !important;
 }
-body.high-contrast-mode .role-title { color: #0f172a !important; font-weight: 700 !important; }
-body.high-contrast-mode .role-date { color: #2563eb !important; font-weight: 600 !important; }
+body.high-contrast-mode .role-title { color: #000000 !important; font-weight: 700 !important; }
+body.high-contrast-mode .role-date { color: #1d4ed8 !important; font-weight: 600 !important; }
 body.high-contrast-mode .tag-accent { color: #dc2626 !important; }
-body.high-contrast-mode .tag-secondary { color: #64748b !important; }
-body.high-contrast-mode .company-name { color: #0f172a !important; font-weight: 700 !important; }
-body.high-contrast-mode .clean-log-bullets li { color: #334155 !important; }
-body.high-contrast-mode .clean-log-bullets li::before { color: #2563eb !important; }
-body.high-contrast-mode .status-text { color: #2563eb !important; }
-body.high-contrast-mode .status-indicator-dot { background-color: #2563eb !important; }
+body.high-contrast-mode .tag-secondary { color: #000000 !important; }
+body.high-contrast-mode .company-name { color: #000000 !important; font-weight: 700 !important; }
+body.high-contrast-mode .clean-log-bullets li { color: #000000 !important; }
+body.high-contrast-mode .clean-log-bullets li::before { color: #1d4ed8 !important; }
+body.high-contrast-mode .status-text { color: #1d4ed8 !important; }
+body.high-contrast-mode .status-indicator-dot { background-color: #1d4ed8 !important; }
 
 /* Decrypt button */
 body.high-contrast-mode .btn-decrypt {
-    border-color: #cbd5e1 !important;
-    color: #475569 !important;
-    background: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #000000 !important;
+    background: rgba(255, 255, 255, 0.25) !important;
     font-weight: 500 !important;
     border-radius: 6px !important;
     padding: 8px 16px !important;
 }
 body.high-contrast-mode .btn-decrypt:hover {
-    background: #f1f5f9 !important;
-    border-color: #94a3b8 !important;
-    color: #0f172a !important;
+    background: rgba(255, 255, 255, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #000000 !important;
 }
 
 @media (max-width: 600px) {
