@@ -18,11 +18,12 @@ if (sceneCanvas) {
         reset() {
             this.x = Math.random() * W;
             this.y = Math.random() * H;
-            this.size = Math.random() * 2.5 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.speedY = (Math.random() - 0.5) * 0.5;
-            this.hue = Math.random() > 0.5 ? 180 : 300;
-            this.opacity = Math.random() * 0.5 + 0.3;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = (Math.random() - 0.5) * 0.55;
+            this.speedY = (Math.random() - 0.5) * 0.55;
+            this.hue = Math.random() > 0.6 ? 180 : (Math.random() > 0.5 ? 300 : 60);
+            this.opacity = Math.random() * 0.6 + 0.3;
+            this.pulse = Math.random() * Math.PI * 2;
         }
         update() {
             this.x += this.speedX;
@@ -31,15 +32,21 @@ if (sceneCanvas) {
             if (this.y < 0 || this.y > H) this.speedY *= -1;
         }
         draw() {
+            this.pulse += 0.03;
+            const s = this.size + Math.sin(this.pulse) * 0.5;
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.arc(this.x, this.y, s, 0, Math.PI * 2);
             ctx.fillStyle = `hsla(${this.hue}, 100%, 60%, ${this.opacity})`;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, s * 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${this.hue}, 100%, 60%, ${this.opacity * 0.12})`;
             ctx.fill();
         }
     }
 
     const particles = [];
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < 110; i++) {
         particles.push(new Particle());
     }
 
@@ -48,14 +55,15 @@ if (sceneCanvas) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
                 const dy = particles[i].y - particles[j].y;
-                const dist = dx * dx + dy * dy;
-                if (dist < 16900) {
-                    const a = 0.12 * (1 - Math.sqrt(dist) / 130);
+                const distSq = dx * dx + dy * dy;
+                if (distSq < 25600) {
+                    const a = 0.12 * (1 - Math.sqrt(distSq) / 160);
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = particles[i].hue === 180 ? `rgba(0, 255, 255, ${a})` : `rgba(255, 0, 255, ${a})`;
-                    ctx.lineWidth = 0.6;
+                    const hue = particles[i].hue === 180 ? '0, 255, 255' : '255, 0, 255';
+                    ctx.strokeStyle = `rgba(${hue}, ${a})`;
+                    ctx.lineWidth = 0.7;
                     ctx.stroke();
                 }
             }
@@ -70,14 +78,20 @@ if (sceneCanvas) {
     });
 
     function animateParticles() {
-        ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
+        ctx.fillStyle = 'rgba(5, 5, 8, 0.08)';
         ctx.fillRect(0, 0, W, H);
+        const t = Date.now();
         particles.forEach(p => { p.update(); p.draw(); });
         connectParticles();
         ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 35, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(0, 255, 255, 0.2)';
-        ctx.lineWidth = 1;
+        ctx.arc(mouseX, mouseY, 35 + Math.sin(t * 0.002) * 4, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0, 255, 255, 0.25)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, 55 + Math.sin(t * 0.003 + 1) * 6, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 0, 255, 0.12)';
+        ctx.lineWidth = 0.8;
         ctx.stroke();
         rafId = requestAnimationFrame(animateParticles);
     }
@@ -158,24 +172,23 @@ class MatrixRain {
 
     animate() {
         if (!this.isRunning) return;
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         for (let i = 0; i < this.drops.length; i++) {
-            const x = i * 20 + 10;
-            const y = this.drops[i] * 20;
+            const x = i * 17;
+            const y = this.drops[i] * 17;
             if (y < 0) continue;
 
             const char = this.chars[Math.floor(Math.random() * this.chars.length)];
             this.ctx.fillStyle = '#fff';
-            this.ctx.font = '18px monospace';
+            this.ctx.font = '15px monospace';
             this.ctx.fillText(char, x, y);
 
-            // Trail
-            for (let j = 1; j < 6; j++) {
-                const ty = y - j * 20;
+            for (let j = 1; j < 8; j++) {
+                const ty = y - j * 17;
                 if (ty < 0) break;
-                const alpha = Math.max(0, 0.6 - j * 0.1);
+                const alpha = Math.max(0, 0.65 - j * 0.08);
                 this.ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
                 this.ctx.fillText(this.chars[Math.floor(Math.random() * this.chars.length)], x, ty);
             }
