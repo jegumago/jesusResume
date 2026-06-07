@@ -234,28 +234,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const bootScreen = document.getElementById('boot-screen');
     const mainUi = document.getElementById('main-ui');
 
+    function fadeReplace(hideEl, showEl, onDone) {
+        if (!hideEl || !showEl) { if (onDone) onDone(); return; }
+        const dur = 280;
+        hideEl.style.transition = `opacity ${dur}ms ease, transform ${dur}ms ease`;
+        hideEl.style.opacity = '0';
+        hideEl.style.transform = 'scale(0.97)';
+        setTimeout(() => {
+            hideEl.classList.add('hidden');
+            hideEl.style.opacity = '';
+            hideEl.style.transform = '';
+            hideEl.style.transition = '';
+            showEl.classList.remove('hidden');
+            showEl.style.transition = `opacity ${dur}ms ease, transform ${dur}ms ease`;
+            showEl.style.opacity = '0';
+            showEl.style.transform = 'scale(0.97)';
+            showEl.getBoundingClientRect();
+            showEl.style.opacity = '1';
+            showEl.style.transform = 'scale(1)';
+            setTimeout(() => {
+                showEl.style.opacity = '';
+                showEl.style.transform = '';
+                showEl.style.transition = '';
+                if (onDone) onDone();
+            }, dur + 50);
+        }, dur);
+    }
+
     if (gateHrBtn && gatekeeperScreen) {
         gateHrBtn.addEventListener('click', () => {
-            gatekeeperScreen.classList.add('hidden');
-            if (mainUi) {
-                mainUi.classList.remove('hidden');
+            fadeReplace(gatekeeperScreen, mainUi, () => {
                 revealSectionsSequentially();
-            }
-            const hrToggleBtn = document.getElementById('hr-mode-btn');
-            if (hrToggleBtn && !isHrMode) {
-                hrToggleBtn.click();
-            }
+                const hrToggleBtn = document.getElementById('hr-mode-btn');
+                if (hrToggleBtn && !isHrMode) {
+                    hrToggleBtn.click();
+                }
+            });
         });
     }
 
     if (gateTechBtn && gatekeeperScreen) {
         gateTechBtn.addEventListener('click', () => {
             matrixRain.start();
-            gatekeeperScreen.classList.add('hidden');
-            if (bootScreen) {
-                bootScreen.classList.remove('hidden');
+            fadeReplace(gatekeeperScreen, bootScreen, () => {
                 printBootLine();
-            }
+            });
         });
     }
 
@@ -309,12 +332,10 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(bootTimeout);
             bootComplete = false;
             matrixRain.stop();
-            if (bootScreen) bootScreen.classList.add('hidden');
-            if (mainUi) {
-                mainUi.classList.remove('hidden');
+            fadeReplace(bootScreen, mainUi, () => {
                 const sections = document.querySelectorAll('.staggered-reveal');
                 sections.forEach(s => s.classList.add('visible'));
-            }
+            });
         });
     }
 
@@ -415,11 +436,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 setTimeout(() => {
                     matrixRain.stop();
-                    if (bootScreen) bootScreen.classList.add('hidden');
-                    if (mainUi) {
-                        mainUi.classList.remove('hidden');
+                    fadeReplace(bootScreen, mainUi, () => {
                         revealSectionsSequentially();
-                    }
+                    });
                 }, 800);
             }
         }, 60);
@@ -623,7 +642,27 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('item-title').textContent = isHrMode ? data.corporateTitle : data.cyberTitle;
         document.getElementById('lbl-rarity').innerHTML = corporateTranslation[mode].lblRarity + `<span class="text-accent" id="item-rarity">${isHrMode ? data.corporateRarity : data.cyberRarity}</span>`;
         document.getElementById('lbl-level').innerHTML = corporateTranslation[mode].lblLevel + `<span id="item-level">${isHrMode ? data.corporateLevel : data.cyberLevel}</span>`;
-        document.getElementById('item-desc').textContent = isHrMode ? data.corporateDesc : data.cyberDesc;
+        
+        const descEl = document.getElementById('item-desc');
+        const finalText = isHrMode ? data.corporateDesc : data.cyberDesc;
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}:<>?";
+        let scrambleCount = 0;
+        
+        function runScramble() {
+            if (scrambleCount < 5) {
+                let temp = "";
+                const len = Math.min(35, finalText.length);
+                for (let i = 0; i < len; i++) {
+                    temp += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                descEl.textContent = temp;
+                scrambleCount++;
+                setTimeout(runScramble, 35);
+            } else {
+                descEl.textContent = finalText;
+            }
+        }
+        runScramble();
     }
 
     const inventorySlots = document.querySelectorAll('.inv-slot');
@@ -771,18 +810,34 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             logContainer.innerHTML = "";
             let scrambleCount = 0;
-            const characters = "XX//$$##@@0110_?!";
+            const totalScrambles = 14;
+            const chars = "XX//$$##@@0110_?!<>[]{}|;:ABCDEF01";
             
             function runScramble() {
-                if (scrambleCount < 8) {
-                    let temporaryScramble = "";
-                    for(let i=0; i<20; i++) {
-                        temporaryScramble += characters.charAt(Math.floor(Math.random() * characters.length));
+                if (scrambleCount < totalScrambles) {
+                    const len = scrambleCount < 4 ? 8 : (scrambleCount < 9 ? 16 : 28);
+                    let tmp = "";
+                    for (let i = 0; i < len; i++) {
+                        tmp += chars.charAt(Math.floor(Math.random() * chars.length));
                     }
-                    logContainer.textContent = temporaryScramble;
+                    logContainer.textContent = tmp;
+                    
+                    // Glitch flash on container border
+                    if (scrambleCount % 2 === 0) {
+                        logContainer.style.borderColor = 'var(--accent-critical)';
+                        logContainer.style.borderLeftColor = 'var(--accent-critical)';
+                        setTimeout(() => {
+                            logContainer.style.borderColor = '';
+                            logContainer.style.borderLeftColor = '';
+                        }, 60);
+                    }
+                    
                     scrambleCount++;
-                    setTimeout(runScramble, 30);
+                    const delay = scrambleCount < 5 ? 45 : (scrambleCount < 10 ? 55 : 70);
+                    setTimeout(runScramble, delay);
                 } else {
+                    logContainer.style.borderColor = '';
+                    logContainer.style.borderLeftColor = '';
                     logContainer.innerHTML = fullText;
                 }
             }
