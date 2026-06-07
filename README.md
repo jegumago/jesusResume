@@ -1,36 +1,68 @@
 # Jesús Martínez // DevOps & Admin Portfolio
 
-This repository contains the source code for my professional portfolio, deployed via GitHub Pages. It is designed as a minimalist, terminal-style interface to showcase my experience, skills, and technical focus areas.
+Interactive terminal-style portfolio deployed via GitHub Pages. Features a cyber/neon aesthetic with a dual-mode interface — hacker terminal and professional CV.
 
-## Project Overview
-This page functions as an interactive technical deck. It includes:
-* **System Metrics:** Real-time (simulated) operational performance indicators.
-* **Hardware Inventory:** A categorized breakdown of my technical skills (Jira, Linux, Automation, IAM, Cloud, etc.).
-* **Contract Log:** An encrypted-style timeline of my professional experience that decrypts on interaction.
-* **Adaptive Interface:** Ability to toggle between a "Cyber/Terminal" theme and a "Standard HR/Corporate" layout.
+**Live:** https://jegumago.github.io/jesusResume/
 
-## Deployment Information
-* **Live URL:** https://jegumago.github.io/jesusResume/
-* **Hosting:** GitHub Pages
-* **Branch:** `master`
+---
 
-## Maintenance Workflow
-Whenever I update my portfolio (skills, projects, or metrics), use the following terminal workflow to deploy changes:
+## Features
 
-1. **Navigate to project folder:**
-   cd ~/xx/xxxCV1
+### Identity Gate (Entry Screen)
+- Two entry paths: **CORPORATE_HR_PROTOCOL** (direct to CV) or **BLACK_HAT_TERMINAL** (boot sequence)
+- Animated frame pulse with neon glow transitions
 
+### Hacker Terminal Path
+- Boot sequence with simulated system initialization log lines
+- Login prompt with agent identification + password cracking animation
+- **Matrix Rain** digital katakana fall during the boot sequence
+- Loading bar with decryption progress
 
-   ### Final Steps to Save & Push
-Once you have created that file:
+### Main Interface — Cyber Mode
+- **Neon particle system** — 110 particles with glow, pulse, and interconnecting web (cyan / magenta / yellow)
+- **Animated grid lines** + CRT scanlines overlay
+- **5 floating geometric shapes** with glow and drift animation
+- **Corner brackets** with alternating neon colors
+- **Mouse trail** that expands on interactive elements
+- **Live clock** + version display
+- **System Metrics** — simulated operational KPIs
+- **Hardware Inventory** — 11 skill slots with click-to-inspect metadata pane
+- **Contract Log** — 4 encrypted experience entries with decrypt animation (14-iteration scramble + glitch border flash)
+- **Overclock mode** — inverts neon/critical colors
+- **Toggle font** — terminal ↔ readable
 
-1. **Save it** in your `~/xx/xxxCV1` directory.
-2. Run your new standard deployment command:
+### HR Mode (Standard CV)
+- White glass card (`rgba(255,255,255,0.35)`) floats over the cyber background with backdrop blur
+- Professional layout: Segoe UI font, slate/black text, blue accent (`#1d4ed8`)
+- All cyber decorations visible through the semi-transparent card
+- LinkedIn button with blue border + hover fill
+- Clean section cards with rounded corners
 
-   cd ~/xx/xxxCV1
-   git add .
-   git commit -m ""
-   git push origin master
+### Screen Transitions
+- Smooth fade + scale transitions between gatekeeper → boot → main UI
+- Skill description scramble effect on slot change
+- Staggered reveal animation for sections
 
+### Responsive Design
+- 3 breakpoints: 768px, 600px, 480px
+- Adaptive grid, compact spacing, mobile-friendly controls
 
-I created the shipit function (among some other cool stuff) to avoid doing this add, commit and push located in my .bash_aliases file. Check it out. 
+---
+
+## Tech Stack
+- Vanilla HTML / CSS / JavaScript (no frameworks)
+- Canvas API for particle system and matrix rain
+- Google Fonts: Orbitron (headings)
+- GitHub Pages for hosting (master branch)
+
+---
+
+## Deployment
+
+```bash
+git add .
+git commit -m "description of changes"
+git push origin master
+```
+
+> A `shipit` alias is configured in `.bash_aliases` to streamline this workflow. 
