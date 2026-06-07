@@ -25,6 +25,11 @@ body {
     box-sizing: border-box;
     overflow-x: hidden;
     line-height: 1.5;
+    transition: color 0.4s ease;
+}
+
+.main-deck {
+    transition: background 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease, padding 0.4s ease;
 }
 
 body.readable-font {

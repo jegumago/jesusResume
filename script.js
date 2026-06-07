@@ -445,19 +445,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ACCESSIBILITY SWITCHES
     const toggleFontBtn = document.getElementById('toggle-font-btn');
-    const toggleThemeBtn = document.getElementById('toggle-theme-btn');
 
     if (toggleFontBtn) {
         toggleFontBtn.addEventListener('click', () => {
             document.body.classList.toggle('readable-font');
             toggleFontBtn.textContent = document.body.classList.contains('readable-font') ? "[ TT_TERMINAL_FONT ]" : "[ AA_READABLE_FONT ]";
-        });
-    }
-
-    if (toggleThemeBtn) {
-        toggleThemeBtn.addEventListener('click', () => {
-            document.body.classList.toggle('high-contrast-mode');
-            toggleThemeBtn.textContent = document.body.classList.contains('high-contrast-mode') ? "[ COLOR_MATRIX: ULTRA_MATRIX ]" : "[ COLOR_MATRIX: DEFAULT ]";
         });
     }
 
@@ -580,14 +572,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isHrMode) {
                 document.body.classList.add('readable-font', 'high-contrast-mode');
                 if (toggleFontBtn) toggleFontBtn.textContent = "[ TT_TERMINAL_FONT ]";
-                if (toggleThemeBtn) toggleThemeBtn.textContent = "[ COLOR_MATRIX: DEFAULT ]";
                 
                 const decryptAllBtn = document.getElementById('decrypt-all-btn');
                 if (decryptAllBtn) decryptAllBtn.click();
             } else {
                 document.body.classList.remove('readable-font', 'high-contrast-mode');
                 if (toggleFontBtn) toggleFontBtn.textContent = "[ AA_READABLE_FONT ]";
-                if (toggleThemeBtn) toggleThemeBtn.textContent = "[ COLOR_MATRIX: DEFAULT ]";
             }
 
             hrModeBtn.textContent = corporateTranslation[mode].hrBtn;
