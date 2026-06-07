@@ -580,13 +580,17 @@ body.high-contrast-mode {
 }
 
 body.high-contrast-mode .main-deck {
-    background: #ffffff !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 12px !important;
     padding: 35px 40px !important;
-    box-shadow: 0 8px 50px rgba(0,0,0,0.6), 0 0 100px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 8px 50px rgba(0,0,0,0.5), 0 0 100px rgba(0,0,0,0.25) !important;
     margin: 20px auto !important;
     position: relative;
     z-index: 3;
+    color: #334155 !important;
 }
 
 /* Header */
@@ -658,8 +662,8 @@ body.high-contrast-mode .btn-danger:hover {
 
 /* Sections inside white card */
 body.high-contrast-mode .section-card {
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
+    background: rgba(248, 250, 252, 0.75) !important;
+    border: 1px solid rgba(226, 232, 240, 0.6) !important;
     border-radius: 8px !important;
     padding: 24px !important;
     margin-bottom: 20px !important;
@@ -676,11 +680,11 @@ body.high-contrast-mode .section-instruction { color: #64748b !important; }
 
 /* Metrics */
 body.high-contrast-mode .metric-cell {
-    background: #ffffff !important;
-    border-color: #e2e8f0 !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(226, 232, 240, 0.6) !important;
     border-radius: 6px !important;
 }
-body.high-contrast-mode .metric-cell:hover { border-color: #cbd5e1 !important; }
+body.high-contrast-mode .metric-cell:hover { border-color: rgba(203, 213, 225, 0.8) !important; }
 body.high-contrast-mode .metric-label { color: #64748b !important; font-weight: 500 !important; }
 body.high-contrast-mode .metric-value { color: #0f172a !important; }
 body.high-contrast-mode .text-accent { color: #0f172a !important; }
@@ -688,34 +692,34 @@ body.high-contrast-mode .text-neon { color: #0f172a !important; }
 
 /* Inventory */
 body.high-contrast-mode .inv-slot {
-    border-color: #e2e8f0 !important;
-    background: #ffffff !important;
+    border-color: rgba(226, 232, 240, 0.6) !important;
+    background: rgba(255, 255, 255, 0.55) !important;
     border-radius: 6px !important;
     color: #334155 !important;
     font-weight: 500 !important;
 }
 body.high-contrast-mode .inv-slot:hover {
-    background: #f8fafc !important;
-    border-color: #cbd5e1 !important;
+    background: rgba(248, 250, 252, 0.6) !important;
+    border-color: rgba(203, 213, 225, 0.8) !important;
 }
 body.high-contrast-mode .inv-slot.active {
     border-color: #2563eb !important;
-    background: rgba(37, 99, 235, 0.06) !important;
+    background: rgba(37, 99, 235, 0.12) !important;
     color: #2563eb !important;
 }
 body.high-contrast-mode .inventory-display-pane {
-    background: #ffffff !important;
-    border-color: #e2e8f0 !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    border-color: rgba(226, 232, 240, 0.6) !important;
     border-radius: 6px !important;
 }
 body.high-contrast-mode .display-title { color: #0f172a !important; text-shadow: none !important; font-weight: 700 !important; }
 body.high-contrast-mode .display-meta p { color: #475569 !important; }
-body.high-contrast-mode .pane-divider { border-color: #e2e8f0 !important; }
+body.high-contrast-mode .pane-divider { border-color: rgba(226, 232, 240, 0.6) !important; }
 
 /* Experience */
 body.high-contrast-mode .terminal-experience-box {
-    background: #ffffff !important;
-    border-color: #e2e8f0 !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(226, 232, 240, 0.6) !important;
     border-left-color: #2563eb !important;
     border-radius: 6px !important;
 }
