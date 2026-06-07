@@ -342,10 +342,10 @@ body.high-contrast-mode .tag-secondary { color: #718096 !important; }
 }
 
 body.high-contrast-mode .matrix-rain { opacity: 0.2; }
-body.high-contrast-mode #boot-screen { background: rgba(248, 250, 252, 0.85) !important; }
-body.high-contrast-mode .boot-container { background: rgba(255, 255, 255, 0.9) !important; }
-body.high-contrast-mode #gatekeeper-screen { background: rgba(248, 250, 252, 0.85) !important; }
-body.high-contrast-mode #gatekeeper-screen .gatekeeper-frame { background: rgba(255, 255, 255, 0.92) !important; }
+body.high-contrast-mode #boot-screen { background: #f8fafc !important; }
+body.high-contrast-mode .boot-container { background: #ffffff !important; }
+body.high-contrast-mode #gatekeeper-screen { background: #f8fafc !important; backdrop-filter: none !important; }
+body.high-contrast-mode #gatekeeper-screen .gatekeeper-frame { background: #ffffff !important; }
 body.high-contrast-mode .gatekeeper-hint { color: #64748b !important; }
 body.high-contrast-mode .glitch-title { color: #0f172a !important; text-shadow: 0 0 10px rgba(37, 99, 235, 0.3) !important; }
 
@@ -559,10 +559,34 @@ body.high-contrast-mode .glitch-title { color: #0f172a !important; text-shadow: 
     font-family: var(--font-terminal);
 }
 
-body.high-contrast-mode .corner { opacity: 0.4; border-color: var(--accent-neon); }
-body.high-contrast-mode .grid-lines { background: linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px); background-size: 80px 80px; }
+body.high-contrast-mode .grid-lines,
+body.high-contrast-mode .scanlines,
+body.high-contrast-mode .floating-shapes,
+body.high-contrast-mode .corner { display: none !important; }
 body.high-contrast-mode .mouse-trail { border-color: var(--accent-neon); }
 body.high-contrast-mode .time { color: var(--accent-neon); }
+body.high-contrast-mode .version { color: #94a3b8; }
+
+/* HR mode: strip all green neon glows */
+body.high-contrast-mode .main-title,
+body.high-contrast-mode .main-subtitle,
+body.high-contrast-mode .display-title { text-shadow: none !important; }
+body.high-contrast-mode .section-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important; }
+body.high-contrast-mode .section-card:hover { box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08) !important; }
+body.high-contrast-mode .metric-cell { background: #f1f5f9 !important; box-shadow: none !important; }
+body.high-contrast-mode .metric-cell:hover { box-shadow: 0 0 8px rgba(37, 99, 235, 0.08) !important; }
+body.high-contrast-mode .inv-slot { border-color: var(--border-color) !important; background: #f8fafc !important; box-shadow: none !important; }
+body.high-contrast-mode .inv-slot:hover { background: rgba(37, 99, 235, 0.04) !important; border-color: var(--accent-neon) !important; box-shadow: 0 0 6px rgba(37, 99, 235, 0.06) !important; }
+body.high-contrast-mode .inv-slot.active { box-shadow: 0 0 8px rgba(37, 99, 235, 0.1) !important; }
+body.high-contrast-mode .inventory-display-pane { box-shadow: none !important; }
+body.high-contrast-mode .terminal-experience-box { box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important; }
+body.high-contrast-mode .contact-sub-bar a:hover { text-shadow: none !important; }
+body.high-contrast-mode .gatekeeper-frame:hover { box-shadow: 0 0 20px rgba(37, 99, 235, 0.15) !important; }
+body.high-contrast-mode .btn-gate::after { display: none !important; }
+body.high-contrast-mode .btn-gate,
+body.high-contrast-mode .btn-control,
+body.high-contrast-mode .btn-skip,
+body.high-contrast-mode .btn-decrypt { border-color: var(--accent-neon) !important; color: var(--accent-neon) !important; }
 
 @media (max-width: 600px) {
     .corner { width: 50px; height: 50px; }
