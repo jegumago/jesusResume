@@ -31,17 +31,6 @@ body.readable-font {
     font-family: var(--font-readable) !important;
 }
 
-body.high-contrast-mode {
-    --bg-main: #f8fafc !important;
-    --card-bg: #ffffff !important;
-    --text-main: #1e293b !important;
-    --text-bright: #0f172a !important;
-    --border-color: #e2e8f0 !important;
-    --accent-neon: #2563eb !important;
-    --accent-critical: #dc2626 !important;
-    --accent-dim: #94a3b8 !important;
-}
-
 body.overclocked {
     --accent-neon: #ff3366 !important;
     --accent-critical: #00ff99 !important;
@@ -579,31 +568,35 @@ body.high-contrast-mode .glitch-title { color: #0f172a !important; text-shadow: 
 }
 
 /* ==========================================
-   HR MODE — PROFESSIONAL CV CLEAN LAYOUT
+   HR MODE — WHITE CV CARD ON CYBER BG
    ========================================== */
-body.high-contrast-mode .grid-lines,
-body.high-contrast-mode .scanlines,
-body.high-contrast-mode .floating-shapes,
-body.high-contrast-mode .corner,
-body.high-contrast-mode .scene,
-body.high-contrast-mode #scene { display: none !important; }
-body.high-contrast-mode .mouse-trail { border-color: var(--accent-neon); }
-body.high-contrast-mode .time { color: var(--accent-neon); }
+body.high-contrast-mode .mouse-trail { border-color: #2563eb; opacity: 0.3; }
+body.high-contrast-mode .time { color: #2563eb; }
 body.high-contrast-mode .version { color: #94a3b8; }
 
 body.high-contrast-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    padding: 40px 20px !important;
+    padding: 20px !important;
+}
+
+body.high-contrast-mode .main-deck {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 35px 40px !important;
+    box-shadow: 0 8px 50px rgba(0,0,0,0.6), 0 0 100px rgba(0,0,0,0.3) !important;
+    margin: 20px auto !important;
+    position: relative;
+    z-index: 3;
 }
 
 /* Header */
 body.high-contrast-mode .deck-header {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 15px !important;
-    border-bottom: 2px solid var(--border-color) !important;
+    gap: 8px !important;
+    border-bottom: 2px solid #e2e8f0 !important;
     padding-bottom: 20px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 25px !important;
 }
 body.high-contrast-mode .main-title {
     color: #0f172a !important;
@@ -617,9 +610,9 @@ body.high-contrast-mode .main-subtitle {
     font-size: 1.05rem !important;
     font-weight: 500 !important;
     text-shadow: none !important;
-    margin-bottom: 12px !important;
+    margin: 0 0 8px 0 !important;
 }
-body.high-contrast-mode .contact-meta { opacity: 0.5 !important; font-size: 0.8rem !important; color: #64748b !important; }
+body.high-contrast-mode .contact-meta { opacity: 0.5; font-size: 0.8rem; color: #64748b; }
 body.high-contrast-mode .linkedin-link {
     color: #2563eb !important;
     border-color: #2563eb !important;
@@ -638,9 +631,7 @@ body.high-contrast-mode .control-matrix { align-self: flex-start !important; }
 
 /* Control buttons */
 body.high-contrast-mode .btn-control,
-body.high-contrast-mode .btn-skip,
-body.high-contrast-mode .btn-decrypt,
-body.high-contrast-mode .btn-gate {
+body.high-contrast-mode .btn-skip {
     border-color: #cbd5e1 !important;
     color: #475569 !important;
     background: #ffffff !important;
@@ -650,13 +641,10 @@ body.high-contrast-mode .btn-gate {
     padding: 8px 16px !important;
 }
 body.high-contrast-mode .btn-control:hover,
-body.high-contrast-mode .btn-skip:hover,
-body.high-contrast-mode .btn-decrypt:hover,
-body.high-contrast-mode .btn-gate:hover {
+body.high-contrast-mode .btn-skip:hover {
     background: #f1f5f9 !important;
     border-color: #94a3b8 !important;
     color: #0f172a !important;
-    box-shadow: none !important;
 }
 body.high-contrast-mode .btn-danger {
     border-color: #e2e8f0 !important;
@@ -667,16 +655,15 @@ body.high-contrast-mode .btn-danger:hover {
     border-color: #fca5a5 !important;
     color: #dc2626 !important;
 }
-body.high-contrast-mode .btn-gate::after,
-body.high-contrast-mode .btn-gate:hover::after { display: none !important; }
 
-/* Section cards */
+/* Sections inside white card */
 body.high-contrast-mode .section-card {
-    background: #ffffff !important;
+    background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
     padding: 24px !important;
+    margin-bottom: 20px !important;
+    box-shadow: none !important;
 }
 body.high-contrast-mode .section-card h2 {
     color: #0f172a !important;
@@ -685,24 +672,15 @@ body.high-contrast-mode .section-card h2 {
     font-size: 1.15rem !important;
     padding-bottom: 12px !important;
 }
-body.high-contrast-mode .section-card:hover {
-    border-color: #e2e8f0 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
-}
 body.high-contrast-mode .section-instruction { color: #64748b !important; }
 
 /* Metrics */
-body.high-contrast-mode .metrics-grid { gap: 12px !important; }
 body.high-contrast-mode .metric-cell {
-    background: #f8fafc !important;
+    background: #ffffff !important;
     border-color: #e2e8f0 !important;
     border-radius: 6px !important;
-    box-shadow: none !important;
 }
-body.high-contrast-mode .metric-cell:hover {
-    border-color: #cbd5e1 !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
-}
+body.high-contrast-mode .metric-cell:hover { border-color: #cbd5e1 !important; }
 body.high-contrast-mode .metric-label { color: #64748b !important; font-weight: 500 !important; }
 body.high-contrast-mode .metric-value { color: #0f172a !important; }
 body.high-contrast-mode .text-accent { color: #0f172a !important; }
@@ -711,28 +689,24 @@ body.high-contrast-mode .text-neon { color: #0f172a !important; }
 /* Inventory */
 body.high-contrast-mode .inv-slot {
     border-color: #e2e8f0 !important;
-    background: #f8fafc !important;
-    box-shadow: none !important;
+    background: #ffffff !important;
     border-radius: 6px !important;
     color: #334155 !important;
     font-weight: 500 !important;
 }
 body.high-contrast-mode .inv-slot:hover {
-    background: #f1f5f9 !important;
+    background: #f8fafc !important;
     border-color: #cbd5e1 !important;
-    box-shadow: none !important;
 }
 body.high-contrast-mode .inv-slot.active {
     border-color: #2563eb !important;
     background: rgba(37, 99, 235, 0.06) !important;
     color: #2563eb !important;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
 }
 body.high-contrast-mode .inventory-display-pane {
-    background: #f8fafc !important;
+    background: #ffffff !important;
     border-color: #e2e8f0 !important;
     border-radius: 6px !important;
-    box-shadow: none !important;
 }
 body.high-contrast-mode .display-title { color: #0f172a !important; text-shadow: none !important; font-weight: 700 !important; }
 body.high-contrast-mode .display-meta p { color: #475569 !important; }
@@ -740,44 +714,35 @@ body.high-contrast-mode .pane-divider { border-color: #e2e8f0 !important; }
 
 /* Experience */
 body.high-contrast-mode .terminal-experience-box {
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-left: 4px solid #2563eb !important;
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    border-left-color: #2563eb !important;
     border-radius: 6px !important;
-    box-shadow: none !important;
 }
 body.high-contrast-mode .role-title { color: #0f172a !important; font-weight: 700 !important; }
 body.high-contrast-mode .role-date { color: #2563eb !important; font-weight: 600 !important; }
-body.high-contrast-mode .experience-metadata { opacity: 1 !important; }
 body.high-contrast-mode .tag-accent { color: #dc2626 !important; }
 body.high-contrast-mode .tag-secondary { color: #64748b !important; }
-body.high-contrast-mode .tag-divider { color: #cbd5e1 !important; }
-body.high-contrast-mode .box-divider { border-color: #e2e8f0 !important; }
-body.high-contrast-mode .decryption-status-line .status-text { color: #2563eb !important; }
-body.high-contrast-mode .status-indicator-dot { background-color: #2563eb !important; }
 body.high-contrast-mode .company-name { color: #0f172a !important; font-weight: 700 !important; }
 body.high-contrast-mode .clean-log-bullets li { color: #334155 !important; }
 body.high-contrast-mode .clean-log-bullets li::before { color: #2563eb !important; }
+body.high-contrast-mode .status-text { color: #2563eb !important; }
+body.high-contrast-mode .status-indicator-dot { background-color: #2563eb !important; }
 
-/* Gateway overlays HR */
-body.high-contrast-mode #boot-screen { background: #f8fafc !important; }
-body.high-contrast-mode .boot-container { background: #ffffff !important; border-color: #e2e8f0 !important; }
-body.high-contrast-mode #gatekeeper-screen { background: #f8fafc !important; backdrop-filter: none !important; }
-body.high-contrast-mode #gatekeeper-screen .gatekeeper-frame { background: #ffffff !important; }
-body.high-contrast-mode .gatekeeper-hint { color: #64748b !important; letter-spacing: 1px !important; }
-body.high-contrast-mode .glitch-title { color: #0f172a !important; text-shadow: none !important; }
-body.high-contrast-mode .gatekeeper-frame:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important; }
-
-/* Gatekeeper buttons */
-body.high-contrast-mode #gate-hr-btn,
-body.high-contrast-mode #gate-tech-btn {
-    padding: 12px 20px !important;
+/* Decrypt button */
+body.high-contrast-mode .btn-decrypt {
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+    background: #ffffff !important;
+    font-weight: 500 !important;
     border-radius: 6px !important;
+    padding: 8px 16px !important;
 }
-body.high-contrast-mode #gate-hr-btn { border-color: #2563eb !important; color: #2563eb !important; }
-body.high-contrast-mode #gate-hr-btn:hover { background: #2563eb !important; color: #ffffff !important; }
-body.high-contrast-mode #gate-tech-btn { border-color: #475569 !important; color: #475569 !important; }
-body.high-contrast-mode #gate-tech-btn:hover { background: #475569 !important; color: #ffffff !important; }
+body.high-contrast-mode .btn-decrypt:hover {
+    background: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+    color: #0f172a !important;
+}
 
 @media (max-width: 600px) {
     .corner { width: 50px; height: 50px; }
