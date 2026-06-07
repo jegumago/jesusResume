@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JESÚS MARTÍNEZ // DEVOPS_DECK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="grid-lines"></div>
+    <div class="scanlines"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <canvas class="scene" id="scene"></canvas>
+    <canvas id="matrix-rain" class="matrix-rain hidden"></canvas>
 
     <!-- ==========================================
          GATEKEEPER LAYER (INITIAL SCREEN)
@@ -169,6 +187,10 @@
         </section>
 
     </main>
+
+    <div class="version">v1.0.0</div>
+    <div class="time" id="time">00:00:00</div>
+    <div class="mouse-trail" id="trail"></div>
 
     <script src="script.js"></script>
 </body>

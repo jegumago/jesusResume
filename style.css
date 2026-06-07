@@ -67,14 +67,34 @@ body.overclocked {
 
 .hidden { display: none !important; }
 
+#gatekeeper-screen {
+    background: rgba(5, 8, 6, 0.65) !important;
+    backdrop-filter: blur(3px);
+}
+
+#gatekeeper-screen .gatekeeper-frame {
+    animation: framePulse 4s ease-in-out infinite;
+}
+
+@keyframes framePulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.15), 0 0 60px rgba(0, 255, 255, 0.05); }
+    50% { box-shadow: 0 0 50px rgba(255, 0, 255, 0.25), 0 0 80px rgba(255, 0, 255, 0.1); }
+}
+
 .gatekeeper-frame {
-    background: var(--card-bg);
+    background: rgba(10, 16, 12, 0.75);
     border: 2px solid var(--border-color);
     padding: 40px;
     text-align: center;
     max-width: 500px;
     width: 100%;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    transition: box-shadow 0.3s ease;
+}
+
+.gatekeeper-frame:hover {
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 40px rgba(0, 255, 153, 0.2), 0 0 80px rgba(0, 255, 153, 0.05);
 }
 
 .glitch-title {
@@ -82,10 +102,41 @@ body.overclocked {
     font-size: 2rem;
     margin-bottom: 10px;
     letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2);
+    animation: titleGlow 3s ease-in-out infinite;
 }
 
-.gatekeeper-hint { margin-bottom: 30px; color: var(--text-main); }
+@keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2); }
+    50% { text-shadow: 0 0 20px rgba(255, 0, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.3); }
+}
+
+.gatekeeper-hint { margin-bottom: 30px; color: var(--text-main); letter-spacing: 3px; }
 .gatekeeper-actions { display: flex; flex-direction: column; gap: 15px; }
+
+.btn-gate {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-gate::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+    animation: btnSweep 3s linear infinite;
+}
+
+@keyframes btnSweep {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.btn-gate:hover::after { display: none; }
 
 .boot-container {
     width: 100%;
@@ -219,3 +270,287 @@ body.high-contrast-mode .tag-secondary { color: #718096 !important; }
 
 .staggered-reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
 .staggered-reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ==========================================
+   MATRIX RAIN & BOOT EFFECTS
+   ========================================== */
+.matrix-rain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+#boot-screen {
+    background: rgba(5, 8, 6, 0.65) !important;
+}
+
+.boot-container {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(2px);
+}
+
+.glitch-flash {
+    animation: glitchFlicker 0.15s ease 4;
+}
+
+@keyframes glitchFlicker {
+    0% { opacity: 1; transform: translate(0); }
+    25% { opacity: 0.2; transform: translate(-3px, 1px); }
+    50% { opacity: 0.9; transform: translate(3px, -1px); }
+    75% { opacity: 0.3; transform: translate(-1px, 2px); }
+    100% { opacity: 1; transform: translate(0); }
+}
+
+@keyframes scanlineFlicker {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.2; }
+    100% { opacity: 0.4; }
+}
+
+#boot-log p {
+    margin: 0 0 4px 0;
+    animation: textFadeIn 0.3s ease-out;
+}
+
+@keyframes textFadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.blink-prompt {
+    animation: blink 0.8s infinite;
+}
+
+body.high-contrast-mode .matrix-rain { opacity: 0.25; }
+body.high-contrast-mode #boot-screen { background: rgba(247, 249, 250, 0.85) !important; }
+body.high-contrast-mode .boot-container { background: rgba(255, 255, 255, 0.85) !important; }
+body.high-contrast-mode #gatekeeper-screen { background: rgba(247, 249, 250, 0.85) !important; }
+body.high-contrast-mode #gatekeeper-screen .gatekeeper-frame { background: rgba(255, 255, 255, 0.9) !important; }
+
+/* ==========================================
+   NEON LANDING DECORATIVE ELEMENTS
+   ========================================== */
+:root {
+    --neon-primary: #0ff;
+    --neon-secondary: #f0f;
+    --neon-tertiary: #ff0;
+}
+
+.scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.main-deck, .overlay-screen {
+    position: relative;
+    z-index: 1;
+}
+
+.overlay-screen {
+    position: fixed;
+    z-index: 9999;
+}
+
+.grid-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, rgba(0, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(0, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.02) 2px, transparent 2px),
+        linear-gradient(rgba(255, 0, 255, 0.02) 2px, transparent 2px);
+    background-size: 80px 80px, 80px 80px, 160px 160px, 160px 160px;
+    animation: gridMove 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(80px, 80px); }
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+
+.corner {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--neon-primary);
+    opacity: 0.45;
+    z-index: 0;
+    pointer-events: none;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 255, 255, 0.05);
+}
+
+.corner-tl, .corner-br { border-color: var(--neon-primary); }
+.corner-tr, .corner-bl { border-color: var(--neon-secondary); }
+
+.corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+.floating-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border: 2px solid;
+    opacity: 0.35;
+    animation: float 8s ease-in-out infinite;
+    box-shadow: 0 0 20px currentColor, inset 0 0 10px currentColor;
+}
+
+.shape-1 {
+    width: 80px; height: 80px;
+    top: 12%; left: 8%;
+    border-color: var(--neon-primary);
+    transform: rotate(45deg);
+    color: var(--neon-primary);
+    animation-duration: 7s;
+}
+
+.shape-2 {
+    width: 120px; height: 120px;
+    top: 65%; right: 12%;
+    border-color: var(--neon-secondary);
+    border-radius: 50%;
+    animation-delay: -2s;
+    color: var(--neon-secondary);
+    animation-duration: 9s;
+}
+
+.shape-3 {
+    width: 60px; height: 60px;
+    bottom: 25%; left: 18%;
+    border-color: var(--neon-tertiary);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    animation-delay: -4s;
+    color: var(--neon-tertiary);
+    animation-duration: 6s;
+}
+
+.shape-4 {
+    width: 40px; height: 40px;
+    top: 40%; left: 60%;
+    border-color: var(--neon-primary);
+    border-radius: 4px;
+    animation-delay: -1s;
+    animation-duration: 11s;
+    color: var(--neon-primary);
+    opacity: 0.25;
+    box-shadow: 0 0 10px currentColor;
+}
+
+.shape-5 {
+    width: 30px; height: 30px;
+    top: 25%; right: 35%;
+    border-color: var(--neon-tertiary);
+    border-radius: 50%;
+    animation-delay: -5s;
+    animation-duration: 13s;
+    color: var(--neon-tertiary);
+    opacity: 0.2;
+    box-shadow: 0 0 8px currentColor;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-25px) rotate(5deg); }
+    66% { transform: translateY(10px) rotate(-3deg); }
+}
+
+.mouse-trail {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--neon-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s, height 0.2s;
+    z-index: 9998;
+    opacity: 0.5;
+    mix-blend-mode: screen;
+}
+
+.mouse-trail.hovering {
+    width: 40px;
+    height: 40px;
+    border-color: var(--neon-secondary);
+    opacity: 0.8;
+}
+
+.version {
+    position: fixed;
+    bottom: 20px;
+    left: 130px;
+    font-size: 0.65rem;
+    color: var(--text-dim, #667);
+    letter-spacing: 2px;
+    z-index: 1;
+    pointer-events: none;
+    font-family: var(--font-terminal);
+}
+
+.time {
+    position: fixed;
+    bottom: 20px;
+    right: 130px;
+    font-size: 0.65rem;
+    color: var(--neon-primary);
+    letter-spacing: 2px;
+    z-index: 1;
+    pointer-events: none;
+    font-family: var(--font-terminal);
+}
+
+body.high-contrast-mode .corner { opacity: 0.4; border-color: var(--accent-neon); }
+body.high-contrast-mode .grid-lines { background: linear-gradient(90deg, rgba(26,86,196,0.05) 1px, transparent 1px), linear-gradient(rgba(26,86,196,0.05) 1px, transparent 1px); background-size: 80px 80px; }
+body.high-contrast-mode .mouse-trail { border-color: var(--accent-neon); }
+body.high-contrast-mode .time { color: var(--accent-neon); }
+
+@media (max-width: 600px) {
+    .corner { width: 50px; height: 50px; }
+    .corner-tl { top: 10px; left: 10px; }
+    .corner-tr { top: 10px; right: 10px; }
+    .corner-bl { bottom: 10px; left: 10px; }
+    .corner-br { bottom: 10px; right: 10px; }
+    .version { left: 70px; bottom: 15px; }
+    .time { right: 70px; bottom: 15px; }
+}
