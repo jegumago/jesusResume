@@ -592,7 +592,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             hrModeBtn.textContent = corporateTranslation[mode].hrBtn;
             document.getElementById('cv-subtitle').textContent = corporateTranslation[mode].subtitle;
-            document.getElementById('cv-contact').innerHTML = corporateTranslation[mode].contact;
+            const metaEl = document.querySelector('.contact-meta');
+            if (metaEl) metaEl.textContent = isHrMode ? 'Location: Mexico City | Languages: Fluent English, Native Spanish' : 'LOC: CDMX // LANG: EN_ADV, ES_NAT';
             
             document.getElementById('sec0-title').textContent = corporateTranslation[mode].sec0Title;
             document.getElementById('lbl-exp').textContent = corporateTranslation[mode].lblExp;
