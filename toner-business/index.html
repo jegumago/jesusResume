@@ -95,6 +95,13 @@
   <div class="hero-wave"><svg viewBox="0 0 1440 60" fill="none"><path d="M0 60V30C240 0 480 0 720 30C960 60 1200 60 1440 30V60H0Z" fill="white"/></svg></div>
 </section>
 
+<!-- ===== FLOATING MODE TOGGLES ===== -->
+<div id="floatToggles" class="float-toggles">
+  <button class="float-btn float-btn-client" onclick="loginDemo('cliente')">👤 Cliente</button>
+  <button class="float-btn float-btn-admin" onclick="loginDemo('admin')">🔐 Admin</button>
+  <button class="float-btn float-btn-out d-none" id="floatLogout" onclick="logoutDemo()">✕ Salir</button>
+</div>
+
 <!-- ===== PRODUCTS ===== -->
 <section id="products" class="section-products">
   <div class="container">
@@ -267,11 +274,15 @@ function loginDemo(role) {
   if (role === 'admin') { document.body.classList.add('show-admin'); }
   document.getElementById('demoButtons').classList.add('d-none');
   document.getElementById('logoutBtn').classList.remove('d-none');
+  var ft = document.getElementById('floatToggles');
+  if (ft) { ft.querySelector('.float-btn-client').classList.add('d-none'); ft.querySelector('.float-btn-admin').classList.add('d-none'); ft.querySelector('.float-btn-out').classList.remove('d-none'); }
 }
 function logoutDemo() {
   document.body.classList.remove('show-admin');
   document.getElementById('demoButtons').classList.remove('d-none');
   document.getElementById('logoutBtn').classList.add('d-none');
+  var ft = document.getElementById('floatToggles');
+  if (ft) { ft.querySelector('.float-btn-client').classList.remove('d-none'); ft.querySelector('.float-btn-admin').classList.remove('d-none'); ft.querySelector('.float-btn-out').classList.add('d-none'); }
 }
 function showAdminInfo(action) {
   const t = document.getElementById('adminActionTitle');
