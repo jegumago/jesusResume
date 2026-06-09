@@ -519,74 +519,38 @@ h1, h2, h3, .display-6, .hero-title {
 }
 
 /* ==============================
-   FLOATING DEMO FAB
+   FLOATING MODE TOGGLES
    ============================== */
-.demo-fab {
+.float-toggles {
   position: fixed;
   bottom: 16px;
   right: 16px;
   z-index: 9998;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
+  gap: 8px;
 }
 
-.fab-main {
-  background: rgba(28,25,23,0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(245,158,11,0.25);
-  color: #e7e5e4;
-  border-radius: 24px;
-  padding: 8px 18px;
-  font-size: 12px;
+.float-btn {
+  border: none;
+  border-radius: 22px;
+  padding: 10px 18px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
   transition: all .2s;
   white-space: nowrap;
-  font-family: inherit;
+  text-align: center;
 }
 
-.fab-main:hover {
-  background: rgba(28,25,23,0.95);
-  border-color: var(--accent);
-  box-shadow: 0 4px 20px rgba(245,158,11,0.15);
-}
-
-.fab-menu {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  background: rgba(28,25,23,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(245,158,11,0.2);
-  border-radius: 14px;
-  padding: 6px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-.fab-menu.show { display: flex; }
-
-.fab-opt {
-  border: none;
-  background: transparent;
-  color: #d6d3d1;
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: left;
-  white-space: nowrap;
-  transition: all .15s;
-  font-family: inherit;
-}
-
-.fab-opt:hover { background: rgba(245,158,11,0.15); color: #fff; }
-.fab-client:hover { background: rgba(16,185,129,0.2); }
-.fab-admin:hover { background: rgba(217,119,6,0.2); }
+.float-btn-client { background: #10b981; }
+.float-btn-client:hover { background: #059669; transform: scale(1.05); }
+.float-btn-admin { background: #d97706; }
+.float-btn-admin:hover { background: #b45309; transform: scale(1.05); }
+.float-btn-out { background: #ef4444; }
+.float-btn-out:hover { background: #dc2626; transform: scale(1.05); }
 
 /* ==============================
    FOOTER
@@ -640,9 +604,8 @@ footer { border-top: 1px solid rgba(255,255,255,0.05); }
   .mascot-img { width: 80px; }
   .navbar-brand { font-size: 1rem !important; }
   .brand-text { font-size: 1rem !important; }
-  .demo-fab { bottom: 10px; right: 10px; }
-  .fab-main { padding: 6px 14px; font-size: 11px; }
-  .fab-opt { padding: 7px 14px; font-size: 11px; }
+  .float-toggles { bottom: 10px; right: 10px; gap: 6px; }
+  .float-btn { padding: 8px 14px; font-size: 11px; }
   table.table thead th, table.table tbody td { font-size: 0.75rem; white-space: nowrap; }
 }
 
@@ -652,7 +615,6 @@ footer { border-top: 1px solid rgba(255,255,255,0.05); }
   .brand-icon { font-size: 1.1rem; }
   .hero-mascot { right: 0; bottom: 2%; }
   .mascot-img { width: 55px; opacity: 0.75; }
-  .demo-fab { bottom: 8px; right: 8px; }
-  .fab-main { padding: 6px 12px; font-size: 10px; border-radius: 20px; }
-  .fab-opt { padding: 6px 12px; font-size: 10px; }
+  .float-toggles { bottom: 8px; right: 8px; gap: 4px; }
+  .float-btn { padding: 6px 12px; font-size: 10px; }
 }

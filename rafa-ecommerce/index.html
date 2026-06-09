@@ -98,15 +98,11 @@
   <div class="hero-wave"><svg viewBox="0 0 1440 60" fill="none"><path d="M0 60V30C240 0 480 0 720 30C960 60 1200 60 1440 30V60H0Z" fill="white"/></svg></div>
 </section>
 
-<!-- ===== FLOATING DEMO TOGGLE ===== -->
-<div class="demo-fab" id="demoFab">
-  <button class="fab-main" id="fabMain" onclick="toggleFab()">
-    <span class="fab-label" id="fabLabel">◈ Demo</span>
-  </button>
-  <div class="fab-menu" id="fabMenu">
-    <button class="fab-opt fab-client" onclick="loginDemo('cliente')">👤 Ver como Cliente</button>
-    <button class="fab-opt fab-admin" onclick="loginDemo('admin')">🔐 Ver como Admin</button>
-  </div>
+<!-- ===== FLOATING MODE TOGGLES ===== -->
+<div id="floatToggles" class="float-toggles">
+  <button class="float-btn float-btn-client" onclick="loginDemo('cliente')">👤 Demo Cliente</button>
+  <button class="float-btn float-btn-admin" onclick="loginDemo('admin')">🔐 Demo Admin</button>
+  <button class="float-btn float-btn-out d-none" id="floatLogout" onclick="logoutDemo()">✕ Salir</button>
 </div>
 
 <section id="products" class="section-products">
@@ -302,26 +298,15 @@ function loginDemo(role) {
   if (role === 'admin') { document.body.classList.add('show-admin'); }
   document.getElementById('demoButtons').classList.add('d-none');
   document.getElementById('logoutBtn').classList.remove('d-none');
-  var f = document.getElementById('fabLabel');
-  var m = document.getElementById('fabMenu');
-  if (f) { f.textContent = role === 'admin' ? '◈ Admin' : '◈ Cliente'; }
-  if (m) m.classList.remove('show');
+  var ft = document.getElementById('floatToggles');
+  if (ft) { ft.querySelector('.float-btn-client').classList.add('d-none'); ft.querySelector('.float-btn-admin').classList.add('d-none'); ft.querySelector('.float-btn-out').classList.remove('d-none'); }
 }
 function logoutDemo() {
   document.body.classList.remove('show-admin');
   document.getElementById('demoButtons').classList.remove('d-none');
   document.getElementById('logoutBtn').classList.add('d-none');
-  var f = document.getElementById('fabLabel');
-  var m = document.getElementById('fabMenu');
-  if (f) f.textContent = '◈ Demo';
-  if (m) m.classList.remove('show');
-}
-function toggleFab() {
-  if (document.getElementById('logoutBtn').classList.contains('d-none')) {
-    document.getElementById('fabMenu').classList.toggle('show');
-  } else {
-    logoutDemo();
-  }
+  var ft = document.getElementById('floatToggles');
+  if (ft) { ft.querySelector('.float-btn-client').classList.remove('d-none'); ft.querySelector('.float-btn-admin').classList.remove('d-none'); ft.querySelector('.float-btn-out').classList.add('d-none'); }
 }
 function showAdminInfo(action) {
   const t = document.getElementById('adminActionTitle');
@@ -376,13 +361,6 @@ document.querySelectorAll('.nav-link-custom').forEach(function(link) {
   });
   v.addEventListener('mouseleave', () => c.forEach(card => { card.style.setProperty('--mx', '0px'); card.style.setProperty('--my', '0px'); }));
 })();
-// Close FAB menu on outside click
-document.addEventListener('click', function(e) {
-  var fab = document.getElementById('demoFab');
-  if (fab && !fab.contains(e.target)) {
-    document.getElementById('fabMenu').classList.remove('show');
-  }
-});
 </script>
 </body>
 </html>
