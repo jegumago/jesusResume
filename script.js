@@ -560,12 +560,12 @@ document.addEventListener('DOMContentLoaded', () => {
             cyberDesc: "Writes clean semantic HTML layouts, structural responsive CSS files, and baseline Javascript automation logic to construct fast, scannable browser tools and application frontends.",
             corporateDesc: "Capable of designing layout code bases using HTML, responsive layout style systems (CSS), and interactive user interface logic (JavaScript) to build clean dashboards and web interfaces."
         },
-        ai: {
-            cyberTitle: "AI_Leverage.run", corporateTitle: "AI Workflow Optimization & Adaptability",
+        'automation-workflow': {
+            cyberTitle: "Automation.run", corporateTitle: "Workflow Optimization & Adaptability",
             cyberRarity: "ADAPTIVE", corporateRarity: "Proactive Workflow Innovation",
             cyberLevel: "INTEGRATION_PATH // ACTIVE", corporateLevel: "Continuous Adaptation & Learning",
-            cyberDesc: "Leverages modern generative models to write code faster, audit technical documentation, and accelerate research loops without creating system code dependencies. Strong natural capacity to adapt and adopt modern productivity suites.",
-            corporateDesc: "Actively researches and integrates Artificial Intelligence models directly inside everyday working loops to optimize administrative speed, write scripts faster, and review technical data logs. Focuses on leveraging AI safely to maximize individual throughput without building tool dependencies."
+            cyberDesc: "Builds scripts and automation pipelines to eliminate repetitive tasks, audit technical documentation, and accelerate research loops. Strong natural capacity to adapt and adopt modern productivity suites.",
+            corporateDesc: "Actively researches and integrates automation tools inside everyday working loops to optimize administrative speed, write scripts faster, and review technical data logs. Focuses on leveraging modern tooling safely to maximize individual throughput without building tool dependencies."
         }
     };
 
