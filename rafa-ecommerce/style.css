@@ -555,9 +555,26 @@ footer { border-top: 1px solid rgba(255,255,255,0.05); }
   .contact-item-card { min-width: 120px; padding: 16px 20px; }
   .display-6 { font-size: 1.5rem !important; }
   .section-products .col-sm-6 { flex: 0 0 auto; width: 100%; }
+  .admin-stat { padding: 14px; }
+  .admin-stat .val { font-size: 20px; }
+  .admin-stat .lbl { font-size: 11px; }
+  .admin-feat-card { padding: 16px; }
+  .admin-feat-icon { font-size: 1.5rem; }
+  .admin-feat-title { font-size: 0.9rem; }
+  .admin-feat-desc { font-size: 0.78rem; }
+  .demo-btns { flex-direction: column; gap: 4px; }
+  .demo-btn { font-size: 10px; padding: 3px 10px; }
+  .hero-mascot { left: -5%; }
+  .mascot-img { width: 90px; }
+  .navbar-brand { font-size: 1rem !important; }
+  .brand-text { font-size: 1rem !important; }
+  table.table thead th, table.table tbody td { font-size: 0.75rem; white-space: nowrap; }
 }
 
 @media (max-width: 400px) {
-  .navbar-brand { font-size: 1rem !important; }
-  .brand-text { font-size: 1.1rem !important; }
+  .navbar-brand { font-size: 0.85rem !important; }
+  .brand-text { font-size: 0.9rem !important; }
+  .brand-icon { font-size: 1.1rem; }
+  .hero-mascot { left: -8%; }
+  .mascot-img { width: 70px; }
 }

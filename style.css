@@ -764,48 +764,115 @@ body.high-contrast-mode .btn-decrypt:hover {
     color: #000000 !important;
 }
 
+/* ==========================================
+   RESPONSIVE OPTIMIZATION
+   ========================================== */
 @media (max-width: 768px) {
-    body { padding: 10px; }
-    .main-deck { padding: 20px !important; }
-    .section-card { padding: 18px !important; }
-    .metric-cell { padding: 12px !important; }
-    .inventory-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .gatekeeper-frame { padding: 30px 20px; }
-    .glitch-title { font-size: 1.5rem; }
-    .main-title { font-size: 1.6rem; }
-    .main-subtitle { font-size: 0.85rem; }
-    .deck-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
-    .control-matrix { width: 100%; }
-    .btn-control, .btn-decrypt, .btn-skip { font-size: 0.75rem !important; padding: 6px 10px !important; }
-    .linkedin-link { font-size: 0.85rem !important; padding: 5px 10px !important; }
-    .boot-container { padding: 10px; height: 90vh; }
-    #boot-log { font-size: 0.8rem; }
-    .terminal-input { font-size: 0.85rem; }
+  body { padding: 8px; }
+  .main-deck { max-width: 100%; }
+  .deck-header { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
+  .main-title { font-size: 1.6rem; }
+  .main-subtitle { font-size: 0.8rem; }
+  .contact-sub-bar { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .control-matrix { width: 100%; gap: 6px; }
+  .btn-control, .btn-skip { font-size: 0.7rem; padding: 6px 10px; }
+  .linkedin-link { font-size: 0.8rem; padding: 5px 10px; }
+  .section-card { padding: 16px; margin-bottom: 16px; }
+  .section-card h2 { font-size: 1rem; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .metric-cell { padding: 10px; }
+  .metric-value { font-size: 1rem; }
+  .inventory-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .inv-slot { padding: 10px 8px; font-size: 0.75rem; }
+  .inventory-display-pane { padding: 14px; min-height: 180px; }
+  .display-title { font-size: 1rem; }
+  .display-description { font-size: 0.85rem; }
+  .gatekeeper-frame { padding: 25px 16px; max-width: 90vw; }
+  .glitch-title { font-size: 1.4rem; }
+  .gatekeeper-hint { font-size: 0.7rem; letter-spacing: 1px; }
+  .btn-gate { font-size: 0.75rem; padding: 10px 12px; width: 100%; }
+  .gatekeeper-actions { gap: 10px; }
+  .boot-container { padding: 10px; height: 85vh; max-width: 95vw; }
+  .boot-header { font-size: 0.7rem; flex-wrap: wrap; gap: 6px; }
+  #boot-log { font-size: 0.75rem; }
+  .terminal-input { font-size: 0.8rem; }
+  .terminal-experience-box { padding: 16px; }
+  .role-title { font-size: 1rem; }
+  .role-date { font-size: 0.85rem; }
+  .experience-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .clean-log-bullets li { font-size: 0.85rem; margin-bottom: 8px; }
+  .btn-decrypt { font-size: 0.7rem; padding: 6px 10px; }
+  .corner { width: 50px; height: 50px; opacity: 0.25; }
+  .corner-tl { top: 6px; left: 6px; }
+  .corner-tr { top: 6px; right: 6px; }
+  .corner-bl { bottom: 6px; left: 6px; }
+  .corner-br { bottom: 6px; right: 6px; }
+  .version { left: 60px; bottom: 10px; font-size: 0.5rem; }
+  .time { right: 60px; bottom: 10px; font-size: 0.5rem; }
+  .shape { opacity: 0.15; }
+  .shape-1 { width: 40px; height: 40px; }
+  .shape-2 { width: 60px; height: 60px; }
+  .shape-3 { width: 30px; height: 30px; }
+  .shape-4 { width: 20px; height: 20px; }
+  .shape-5 { width: 18px; height: 18px; }
+  body.high-contrast-mode .main-deck { padding: 20px 16px !important; margin: 10px auto !important; }
+  body.high-contrast-mode .section-card { padding: 14px !important; }
+  body.high-contrast-mode .main-title { font-size: 1.8rem !important; }
+  body.high-contrast-mode .linkedin-link { font-size: 0.8rem !important; }
 }
-@media (max-width: 600px) {
-    .corner { width: 40px; height: 40px; }
-    .corner-tl { top: 8px; left: 8px; }
-    .corner-tr { top: 8px; right: 8px; }
-    .corner-bl { bottom: 8px; left: 8px; }
-    .corner-br { bottom: 8px; right: 8px; }
-    .version { left: 60px; bottom: 12px; font-size: 0.55rem; }
-    .time { right: 60px; bottom: 12px; font-size: 0.55rem; }
-    .metrics-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .inventory-grid { grid-template-columns: 1fr; }
-    .inv-slot { padding: 10px; font-size: 0.8rem; }
-    .gatekeeper-frame { padding: 25px 15px; }
-    .glitch-title { font-size: 1.2rem; }
-    .gatekeeper-hint { font-size: 0.75rem; letter-spacing: 1px; }
-    .btn-gate { font-size: 0.75rem; padding: 10px 12px; }
-    .boot-header { font-size: 0.7rem; flex-direction: column; gap: 8px; align-items: flex-start; }
-}
+
 @media (max-width: 480px) {
-    body { padding: 6px; }
-    .main-deck { padding: 14px !important; border-radius: 8px !important; }
-    .section-card { padding: 14px !important; }
-    .metrics-grid { grid-template-columns: 1fr; }
-    .main-title { font-size: 1.3rem; }
-    .linkedin-link { font-size: 0.75rem !important; padding: 4px 8px !important; }
-    .version { left: 45px; }
-    .time { right: 45px; }
+  body { padding: 4px; }
+  .main-title { font-size: 1.3rem; }
+  .main-subtitle { font-size: 0.7rem; }
+  .contact-meta { font-size: 0.65rem; }
+  .linkedin-link { font-size: 0.7rem; padding: 4px 8px; }
+  .section-card { padding: 12px; margin-bottom: 12px; }
+  .section-card h2 { font-size: 0.9rem; }
+  .metrics-grid { grid-template-columns: 1fr; gap: 6px; }
+  .metric-cell { padding: 8px; }
+  .metric-label { font-size: 0.7rem; }
+  .metric-value { font-size: 0.9rem; }
+  .inventory-grid { grid-template-columns: 1fr; gap: 5px; }
+  .inv-slot { padding: 10px; font-size: 0.8rem; }
+  .inventory-display-pane { padding: 12px; min-height: 150px; }
+  .gatekeeper-frame { padding: 20px 12px; }
+  .glitch-title { font-size: 1.1rem; letter-spacing: 1px; }
+  .gatekeeper-hint { font-size: 0.65rem; }
+  .btn-gate { font-size: 0.7rem; padding: 8px 10px; }
+  .boot-container { height: 90vh; }
+  .boot-header { font-size: 0.65rem; }
+  #boot-log { font-size: 0.7rem; }
+  .terminal-input { font-size: 0.75rem; }
+  .terminal-experience-box { padding: 12px; }
+  .role-title { font-size: 0.95rem; }
+  .clean-log-bullets li { font-size: 0.8rem; }
+  .btn-control, .btn-skip, .btn-decrypt { font-size: 0.65rem; padding: 5px 8px; }
+  .control-matrix { gap: 4px; }
+  .deck-header { gap: 6px !important; }
+  .corner { width: 30px; height: 30px; opacity: 0.2; }
+  .corner-tl { top: 4px; left: 4px; }
+  .corner-tr { top: 4px; right: 4px; }
+  .corner-bl { bottom: 4px; left: 4px; }
+  .corner-br { bottom: 4px; right: 4px; }
+  .version { left: 40px; bottom: 6px; }
+  .time { right: 40px; bottom: 6px; }
+  .mouse-trail { display: none; }
+  .shape-1, .shape-2, .shape-3, .shape-4, .shape-5 { opacity: 0.08; }
+  .log-section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  body.high-contrast-mode .main-deck { padding: 14px 10px !important; margin: 4px auto !important; border-radius: 6px !important; }
+  body.high-contrast-mode .main-title { font-size: 1.5rem !important; }
+  body.high-contrast-mode .main-subtitle { font-size: 0.85rem !important; }
+}
+
+@media (max-width: 400px) {
+  .main-title { font-size: 1.15rem; }
+  .gatekeeper-frame { max-width: 95vw; padding: 16px 10px; }
+  .glitch-title { font-size: 1rem; }
+  .gatekeeper-actions { gap: 8px; }
+  .btn-gate { font-size: 0.65rem; }
+  .boot-container { height: 92vh; padding: 8px; }
+  .btn-control, .btn-skip, .btn-decrypt { font-size: 0.6rem; padding: 4px 6px; letter-spacing: 0; }
+  .corner { width: 20px; height: 20px; border-width: 1px; }
+  .version, .time { font-size: 0.45rem; letter-spacing: 1px; }
 }
