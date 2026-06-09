@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TonerPro — Demo Interactivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .demo-btns { display: flex; gap: 6px; align-items: center; }
+    .demo-btn { border: none; border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; color: #fff; }
+    .demo-btn-client { background: #10b981; } .demo-btn-client:hover { background: #059669; }
+    .demo-btn-admin { background: #6366f1; } .demo-btn-admin:hover { background: #4f46e5; }
+    .demo-btn-out { background: #ef4444; } .demo-btn-out:hover { background: #dc2626; }
+    #adminPanel { display: none; background: #1e293b; color: #e2e8f0; }
+    body.show-admin #adminPanel { display: block; }
+    body.show-admin .hero-section, body.show-admin .section-products, body.show-admin .features-banner,
+    body.show-admin .section-order, body.show-admin .section-testimonials, body.show-admin .section-contact,
+    body.show-admin .cta-banner { display: none; }
+    .admin-stat { background: #0f172a; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+    .admin-stat .val { font-size: 24px; font-weight: 700; }
+    .admin-stat .lbl { color: #94a3b8; font-size: 13px; }
+    .demo-badge { background: #6366f1; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2" href="#home">
+      <span class="brand-icon">🖨️</span>
+      <span class="brand-text">Toner<span class="text-primary">Pro</span></span>
+    </a>
+    <span class="demo-badge">DEMO</span>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#home">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#products">Productos</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#order">Ordenar</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contacto</a></li>
+        <li class="nav-item ms-lg-2">
+          <div class="demo-btns" id="demoButtons">
+            <button class="demo-btn demo-btn-client" onclick="loginDemo('cliente')">👤 Demo Cliente</button>
+            <button class="demo-btn demo-btn-admin" onclick="loginDemo('admin')">🔐 Demo Admin</button>
+          </div>
+          <button class="demo-btn demo-btn-out d-none" id="logoutBtn" onclick="logoutDemo()">✕ Salir</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="hero-section">
+  <div class="hero-bg"><div class="hero-particles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+  <div class="container position-relative" style="z-index:2;">
+    <div class="row min-vh-100 align-items-center">
+      <div class="col-lg-7 hero-text-col">
+        <span class="badge bg-primary bg-opacity-15 text-primary rounded-pill px-3 py-2 mb-3 fs-6 fw-normal d-inline-flex align-items-center gap-2">
+          <span class="hero-badge-dot"></span> +200 empresas confían en nosotros
+        </span>
+        <h1 class="display-3 fw-bold lh-1 mb-3 hero-title">
+          Toner al Mayoreo<br>
+          <span class="hero-highlight">Entrega Nacional</span>
+        </h1>
+        <p class="fs-5 text-white-70 mb-4 col-lg-10 px-0 hero-sub">
+          Cartuchos de toner de alta calidad para todas las marcas. Precios competitivos de mayoreo con entrega a toda la república.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="#order" class="btn btn-primary btn-lg rounded-pill px-4"><i class="bi bi-cart-plus me-1"></i> Hacer Pedido</a>
+          <a href="#products" class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="bi bi-grid me-1"></i> Ver Productos</a>
+        </div>
+        <div class="d-flex gap-4 mt-5 hero-stats">
+          <div><span class="fw-bold fs-4 text-white">500+</span><br><span class="text-white-50 small">Pedidos</span></div>
+          <div><span class="fw-bold fs-4 text-white">50+</span><br><span class="text-white-50 small">Ciudades</span></div>
+          <div><span class="fw-bold fs-4 text-white">98%</span><br><span class="text-white-50 small">Satisfacción</span></div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block hero-visual-col">
+        <div class="hero-visual">
+          <div class="hero-card hero-card-1"><div class="hero-card-icon">🖨️</div><div class="hero-card-text"><div class="fw-bold">Laser Toner</div><div class="small text-white-50">HP, Canon, Brother</div></div></div>
+          <div class="hero-card hero-card-2"><div class="hero-card-icon">📦</div><div class="hero-card-text"><div class="fw-bold">Envío Gratis</div><div class="small text-white-50">Pedidos $500+</div></div></div>
+          <div class="hero-card hero-card-3"><div class="hero-card-icon">⚡</div><div class="hero-card-text"><div class="fw-bold">Express</div><div class="small text-white-50">1-2 días</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave"><svg viewBox="0 0 1440 60" fill="none"><path d="M0 60V30C240 0 480 0 720 30C960 60 1200 60 1440 30V60H0Z" fill="white"/></svg></div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products" class="section-products">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Catálogo</span>
+      <h2 class="display-6 fw-bold">Productos</h2>
+      <p class="text-muted col-lg-6 mx-auto">Compatibles con HP, Canon, Epson, Brother, Samsung y más</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🏢</div><h5>Standard Black Toner</h5><p class="text-muted small">Alto rendimiento. Hasta 3,000 páginas.</p><div class="product-price">$<span class="product-price-value">450</span> <span class="product-price-unit">/ unidad</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card product-card-featured"><div class="product-badge-featured">Popular</div><div class="product-icon-wrap">🎨</div><h5>Color Toner Set</h5><p class="text-muted small">CMYK completo. 2,500 páginas por cartucho.</p><div class="product-price">$<span class="product-price-value">850</span> <span class="product-price-unit">/ set</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">⚡</div><h5>Alta Capacidad</h5><p class="text-muted small">Rendimiento extra. Hasta 10,000 páginas.</p><div class="product-price">$<span class="product-price-value">1,200</span> <span class="product-price-unit">/ unidad</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🔄</div><h5>Drum Units</h5><p class="text-muted small">Unidades de tambor para impresoras láser.</p><div class="product-price">$<span class="product-price-value">650</span> <span class="product-price-unit">/ unidad</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features-banner">
+  <div class="container">
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-truck"></i></div><div class="fw-semibold">Envío Gratis</div><div class="small text-white-50">Pedidos $500+</div></div></div>
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-shield-check"></i></div><div class="fw-semibold">Calidad Garantizada</div><div class="small text-white-50">100% satisfacción</div></div></div>
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-headset"></i></div><div class="fw-semibold">Soporte 24/7</div><div class="small text-white-50">Siempre disponibles</div></div></div>
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-clock-history"></i></div><div class="fw-semibold">Envío Mismo Día</div><div class="small text-white-50">Antes de 2 PM</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ORDER FORM (demo data) ===== -->
+<section id="order" class="section-order">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Demo</span>
+      <h2 class="display-6 fw-bold">Realiza tu Pedido</h2>
+      <p class="text-muted col-lg-6 mx-auto">Ejemplo de formulario — los datos no se envían</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="order-form-card p-4">
+          <div class="row g-3 mb-3">
+            <div class="col-md-6"><label class="form-label fw-semibold small">Nombre <span class="text-danger">*</span></label><input class="form-control form-control-lg" value="Usuario Demo" disabled></div>
+            <div class="col-md-6"><label class="form-label fw-semibold small">Email <span class="text-danger">*</span></label><input class="form-control form-control-lg" value="demo@ejemplo.com" disabled></div>
+            <div class="col-md-6"><label class="form-label fw-semibold small">Teléfono</label><input class="form-control form-control-lg" value="555-123-4567" disabled></div>
+            <div class="col-md-6"><label class="form-label fw-semibold small">Empresa</label><input class="form-control form-control-lg" value="Demo Corp SA" disabled></div>
+          </div>
+          <fieldset class="border rounded-4 p-3 p-md-4 mb-3">
+            <legend class="float-none w-auto px-2 fw-semibold small">📍 Dirección</legend>
+            <div class="row g-3">
+              <div class="col-12"><input class="form-control" value="Av. Reforma 100" disabled></div>
+              <div class="col-md-4"><input class="form-control" value="CDMX" disabled></div>
+              <div class="col-md-4"><input class="form-control" value="CDMX" disabled></div>
+              <div class="col-md-4"><input class="form-control" value="06600" disabled></div>
+            </div>
+          </fieldset>
+          <fieldset class="border rounded-4 p-3 p-md-4 mb-3">
+            <legend class="float-none w-auto px-2 fw-semibold small">📦 Productos</legend>
+            <div class="d-flex justify-content-between mb-2"><span>2x Standard Black Toner</span><strong>$900</strong></div>
+            <div class="d-flex justify-content-between mb-2"><span>1x Color Toner Set</span><strong>$850</strong></div>
+            <div class="border-top pt-2 d-flex justify-content-between fw-bold"><span>Total Estimado</span><span class="text-primary">$1,750 MXN</span></div>
+          </fieldset>
+          <button class="btn btn-primary btn-lg rounded-pill w-100" onclick="new bootstrap.Modal(document.getElementById('orderFlowModal')).show()">Enviar Pedido (Demo)</button>
+          <p class="text-center text-muted small mt-2">Modo demo — formulario no funcional</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section-testimonials">
+  <div class="container">
+    <div class="text-center mb-5"><span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Testimonios</span><h2 class="display-6 fw-bold">Qué Dicen Nuestros Clientes</h2></div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="mt-2 mb-3">"El mejor proveedor de toner. Entrega confiable y precios excelentes para mayoreo."</p><div class="d-flex align-items-center gap-2"><div class="testimonial-avatar">CM</div><div><div class="fw-semibold small">Cliente Demo A</div><div class="text-muted small">Office Manager</div></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="mt-2 mb-3">"El procesamiento de pedidos con IA es increíble. Confirmaciones y seguimiento al instante."</p><div class="d-flex align-items-center gap-2"><div class="testimonial-avatar">LP</div><div><div class="fw-semibold small">Cliente Demo B</div><div class="text-muted small">IT Director</div></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="mt-2 mb-3">"Envío rápido y excelente atención. Altamente recomendado para cualquier negocio."</p><div class="d-flex align-items-center gap-2"><div class="testimonial-avatar">RJ</div><div><div class="fw-semibold small">Cliente Demo C</div><div class="text-muted small">Dueño de Negocio</div></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section-contact">
+  <div class="container">
+    <div class="text-center mb-5"><span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Contacto</span><h2 class="display-6 fw-bold">Contáctanos</h2></div>
+    <div class="row justify-content-center"><div class="col-auto">
+      <div class="d-flex flex-wrap justify-content-center gap-4 gap-md-5">
+        <div class="contact-item-card"><div class="contact-icon-wrap">📞</div><h6 class="text-muted small mb-0">Teléfono</h6><p class="fw-semibold mb-0">+52 (555) 123-4567</p></div>
+        <div class="contact-item-card"><div class="contact-icon-wrap">✉️</div><h6 class="text-muted small mb-0">Email</h6><p class="fw-semibold mb-0">ventas@tonerpro.com</p></div>
+        <div class="contact-item-card"><div class="contact-icon-wrap">📍</div><h6 class="text-muted small mb-0">Ubicación</h6><p class="fw-semibold mb-0">Ciudad de México, MX</p></div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-banner">
+  <div class="container text-center">
+    <h2 class="fw-bold text-white mb-2">¿Listo para ordenar?</h2>
+    <p class="text-white-50 mb-4">Recibe tu toner en cualquier parte del país — rápido y confiable.</p>
+    <a href="#order" class="btn btn-primary btn-lg rounded-pill px-5 shadow-lg"><i class="bi bi-cart-plus me-1"></i> Hacer Pedido</a>
+  </div>
+</section>
+
+<!-- ===== ADMIN PANEL (hidden by default) ===== -->
+<div id="adminPanel">
+  <div style="background:#1a1a2e;padding:12px 0;color:#fff">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span><strong>🖨️ TonerPro — Admin Panel</strong> <span class="demo-badge">Demo</span></span>
+      <button class="demo-btn demo-btn-out" onclick="logoutDemo()">✕ Salir</button>
+    </div>
+  </div>
+  <div class="container py-4">
+    <div class="row g-3 mb-4">
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">📦 Pedidos Totales</div><div class="val">247</div></div></div>
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">💰 Revenue</div><div class="val">$58,430</div></div></div>
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">🏢 Clientes</div><div class="val">89</div></div></div>
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">⏳ Pendientes</div><div class="val">12</div></div></div>
+    </div>
+    <div class="table-responsive mb-4">
+      <table class="table table-dark table-hover align-middle" style="--bs-table-bg:#1e293b;border-radius:12px;overflow:hidden">
+        <thead><tr><th>ID</th><th>Cliente</th><th>Items</th><th>Total</th><th>Estado</th><th>Asignado</th><th>Fecha</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>#1042</td><td>Cliente Demo A</td><td>4x TN-450, 2x CF283A</td><td>$3,240</td><td><span class="badge bg-warning">Pendiente</span></td><td>—</td><td>8 Jun</td><td><div class="dropdown"><button class="btn btn-sm btn-outline-light rounded-pill dropdown-toggle" data-bs-toggle="dropdown">Acciones</button><ul class="dropdown-menu dropdown-menu-dark"><li><a class="dropdown-item" href="#" onclick="showAdminInfo('status')">Cambiar Estado</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('assign')">Asignar</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('notes')">Agregar Nota</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('priority')">Cambiar Prioridad</a></li></ul></div></td></tr>
+          <tr><td>#1041</td><td>Cliente Demo B</td><td>10x CE505A, 5x CF280A</td><td>$8,750</td><td><span class="badge bg-info">Procesando</span></td><td>Staff 1</td><td>7 Jun</td><td><div class="dropdown"><button class="btn btn-sm btn-outline-light rounded-pill dropdown-toggle" data-bs-toggle="dropdown">Acciones</button><ul class="dropdown-menu dropdown-menu-dark"><li><a class="dropdown-item" href="#" onclick="showAdminInfo('status')">Cambiar Estado</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('assign')">Reasignar</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('notes')">Agregar Nota</a></li></ul></div></td></tr>
+          <tr><td>#1040</td><td>Cliente Demo C</td><td>20x TN-1040</td><td>$6,200</td><td><span class="badge bg-success">Completado</span></td><td>Staff 2</td><td>6 Jun</td><td><button class="btn btn-sm btn-outline-light rounded-pill" onclick="showAdminInfo('view')">Ver</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="admin-stat"><h6>📝 Actividad Reciente</h6>
+      <p class="text-secondary small mb-1">10:45 — Admin actualizó pedido #1042 a "Pendiente"</p>
+      <p class="text-secondary small mb-1">09:30 — Cliente Demo B (PrintMax) realizó pedido #1041 por $8,750</p>
+      <p class="text-secondary small mb-1">08:15 — Sistema: backup automático completado</p>
+      <p class="text-secondary small mb-0">Ayer — Staff Demo 1 asignado a pedido #1041</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-dark text-white-50 text-center py-4">
+  <div class="container"><p class="mb-1 small">&copy; 2026 TonerPro. Demo interactivo.</p></div>
+</footer>
+
+<!-- ===== MODALS ===== -->
+<div class="modal fade" id="orderFlowModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+    <div class="modal-header border-0"><h5 class="modal-title fw-bold">📦 Flujo de Pedido</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body">
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">1</span><div><strong>Creación de cuenta</strong><p class="text-muted small mb-0">Al enviar tu primer pedido se crea una cuenta automáticamente con tu email. Recibes un correo para establecer contraseña.</p></div></div>
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">2</span><div><strong>Vista previa del pedido</strong><p class="text-muted small mb-0">Revisas los productos, cantidades y total antes de confirmar. Puedes modificar cualquier dato.</p></div></div>
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">3</span><div><strong>Datos de entrega</strong><p class="text-muted small mb-0">Dirección completa: calle, ciudad, estado, CP. Puedes guardar múltiples direcciones.</p></div></div>
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">4</span><div><strong>Método de pago</strong><p class="text-muted small mb-0">Transferencia, depósito, pago contra entrega o factura. Seleccionas el que prefieras.</p></div></div>
+      <div class="d-flex align-items-start gap-3"><span class="badge bg-primary rounded-pill px-2">5</span><div><strong>Confirmación y seguimiento</strong><p class="text-muted small mb-0">Recibes email de confirmación. Puedes ver tu pedido en "Mis Pedidos" y editarlo hasta que el admin cambie el estado.</p></div></div>
+    </div>
+    <div class="modal-footer border-0"><button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Entendido</button></div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="adminActionModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+    <div class="modal-header border-0"><h5 class="modal-title fw-bold" id="adminActionTitle">Acción</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body" id="adminActionBody"></div>
+    <div class="modal-footer border-0"><button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Entendido</button></div>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function loginDemo(role) {
+  if (role === 'admin') { document.body.classList.add('show-admin'); }
+  document.getElementById('demoButtons').classList.add('d-none');
+  document.getElementById('logoutBtn').classList.remove('d-none');
+}
+function logoutDemo() {
+  document.body.classList.remove('show-admin');
+  document.getElementById('demoButtons').classList.remove('d-none');
+  document.getElementById('logoutBtn').classList.add('d-none');
+}
+function showAdminInfo(action) {
+  const t = document.getElementById('adminActionTitle');
+  const b = document.getElementById('adminActionBody');
+  const info = {
+    status: { title: 'Cambiar Estado', body: '<p>Flujo de estados:</p><div class="d-flex gap-2 mb-2 flex-wrap"><span class="badge bg-warning">Pendiente</span> → <span class="badge bg-info">Procesando</span> → <span class="badge bg-primary">Enviado</span> → <span class="badge bg-success">Completado</span></div><p class="text-muted small">Solo admin y supervisor asignado pueden cambiar el estado. Cada cambio queda registrado en las notas del pedido.</p><p class="text-muted small mb-0"><strong>Cancelado:</strong> solo admin puede cancelar. Pedidos completados no se pueden modificar.</p>' },
+    assign: { title: 'Asignar Pedido', body: '<p class="text-muted small">El admin asigna cada pedido a un miembro del staff (supervisor).</p><p class="text-muted small">El staff solo ve y gestiona los pedidos que tiene asignados. El admin puede reasignar en cualquier momento.</p><p class="text-muted small mb-0"><strong>Auto-asignación:</strong> cuando un supervisor cambia un pedido de Pendiente a Procesando, se le asigna automáticamente.</p>' },
+    notes: { title: 'Notas Internas', body: '<p class="text-muted small">Las notas son visibles solo para admin y staff. El cliente no las ve.</p><p class="text-muted small">Cada acción (cambio de estado, asignación, prioridad) genera una nota automática con fecha, hora y usuario.</p><p class="text-muted small mb-0">Se pueden agregar notas manuales para seguimiento interno: "cliente llamó", "falta material", "entregar antes del viernes".</p>' },
+    priority: { title: 'Prioridad', body: '<div class="d-flex gap-2 mb-2"><span class="badge bg-success">Normal</span> <span class="badge bg-warning">Importante</span> <span class="badge bg-danger">Urgente</span></div><p class="text-muted small">El admin o supervisor pueden cambiar la prioridad. Los pedidos urgentes aparecen primero en el dashboard.</p><p class="text-muted small mb-0">La prioridad ayuda a organizar el trabajo del equipo. No afecta al cliente.</p>' },
+    view: { title: 'Ver Pedido', body: '<p class="text-muted small">Vista completa del pedido: datos del cliente, dirección de envío, productos, total, historial de estados y notas internas.</p><p class="text-muted small">Desde aquí se puede cambiar estado, asignar, agregar notas y cambiar prioridad.</p><p class="text-muted small mb-0"><strong>Pedidos completados:</strong> solo lectura. No se pueden modificar.</p>' },
+  }[action];
+  if (t && b && info) { t.textContent = info.title; b.innerHTML = info.body; new bootstrap.Modal(document.getElementById('adminActionModal')).show(); }
+}
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('navbar-scrolled', window.scrollY > 60);
+});
+// Nav links: auto-logout when in admin view so sections are visible
+document.querySelectorAll('.nav-link-custom').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    if (document.body.classList.contains('show-admin')) {
+      logoutDemo();
+      setTimeout(function() {
+        var target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
+  });
+});
+// Hero parallax
+(function() {
+  const v = document.querySelector('.hero-visual');
+  if (!v) return;
+  const c = v.querySelectorAll('.hero-card');
+  v.addEventListener('mousemove', e => {
+    const r = v.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+    const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+    c.forEach((card, i) => { const f = 8 + i * 4; card.style.setProperty('--mx', `${dx * f}px`); card.style.setProperty('--my', `${dy * f}px`); });
+  });
+  v.addEventListener('mouseleave', () => c.forEach(card => { card.style.setProperty('--mx', '0px'); card.style.setProperty('--my', '0px'); }));
+})();
+</script>
+</body>
+</html>

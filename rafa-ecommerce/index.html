@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entretemente — Rompecabezas Artesanales | Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .demo-btns { display: flex; gap: 6px; align-items: center; }
+    .demo-btn { border: none; border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; color: #fff; }
+    .demo-btn-client { background: #10b981; } .demo-btn-client:hover { background: #059669; }
+    .demo-btn-admin { background: #d97706; } .demo-btn-admin:hover { background: #b45309; }
+    .demo-btn-out { background: #ef4444; } .demo-btn-out:hover { background: #dc2626; }
+    #adminPanel { display: none; background: #292524; color: #e7e5e4; }
+    body.show-admin #adminPanel { display: block; }
+    body.show-admin .hero-section, body.show-admin .section-products, body.show-admin .features-banner,
+    body.show-admin .section-order, body.show-admin .section-testimonials, body.show-admin .section-contact,
+    body.show-admin .cta-banner { display: none; }
+    .admin-stat { background: #1c1917; border-radius: 12px; padding: 20px; border: 1px solid #44403c; }
+    .admin-stat .val { font-size: 24px; font-weight: 700; }
+    .admin-stat .lbl { color: #a8a29e; font-size: 13px; }
+    .demo-badge { background: #d97706; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2" href="#home">
+      <span class="brand-icon">🧩</span>
+      <span class="brand-text">Entrete<span class="text-accent">mente</span></span>
+    </a>
+    <span class="demo-badge">DEMO</span>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#home">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#products">Productos</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#order">Ordenar</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contacto</a></li>
+        <li class="nav-item ms-lg-2">
+          <div class="demo-btns" id="demoButtons">
+            <button class="demo-btn demo-btn-client" onclick="loginDemo('cliente')">👤 Demo Cliente</button>
+            <button class="demo-btn demo-btn-admin" onclick="loginDemo('admin')">🔐 Demo Admin</button>
+          </div>
+          <button class="demo-btn demo-btn-out d-none" id="logoutBtn" onclick="logoutDemo()">✕ Salir</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="hero-section">
+  <div class="hero-bg"><div class="hero-particles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+  <div class="container position-relative" style="z-index:2;">
+    <div class="row min-vh-100 align-items-center">
+      <div class="col-lg-7 hero-text-col">
+        <span class="badge bg-primary bg-opacity-15 text-primary rounded-pill px-3 py-2 mb-3 fs-6 fw-normal d-inline-flex align-items-center gap-2">
+          <span class="hero-badge-dot"></span> Hecho a mano en México desde 2020
+        </span>
+        <h1 class="display-3 fw-bold lh-1 mb-3 hero-title">
+          Rompecabezas<br>
+          <span class="hero-highlight">Artesanales</span>
+        </h1>
+        <p class="fs-5 text-white-70 mb-4 col-lg-10 px-0 hero-sub">
+          Puzzles de madera MDF pintados a mano con diseños únicos inspirados en la cultura mexicana. Cada pieza es una obra de arte.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="#order" class="btn btn-primary btn-lg rounded-pill px-4"><i class="bi bi-cart-plus me-1"></i> Hacer Pedido</a>
+          <a href="#products" class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="bi bi-grid me-1"></i> Ver Productos</a>
+        </div>
+        <div class="d-flex gap-4 mt-5 hero-stats">
+          <div><span class="fw-bold fs-4 text-white">300+</span><br><span class="text-white-50 small">Puzzles Entregados</span></div>
+          <div><span class="fw-bold fs-4 text-white">12+</span><br><span class="text-white-50 small">Diseños Únicos</span></div>
+          <div><span class="fw-bold fs-4 text-white">100%</span><br><span class="text-white-50 small">Hecho a Mano</span></div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block hero-visual-col">
+        <div class="hero-visual">
+          <div class="hero-card hero-card-1"><div class="hero-card-icon">🧩</div><div class="hero-card-text"><div class="fw-bold">MDF Premium</div><div class="small text-white-50">Pintado a mano</div></div></div>
+          <div class="hero-card hero-card-2"><div class="hero-card-icon">🎨</div><div class="hero-card-text"><div class="fw-bold">Personalizable</div><div class="small text-white-50">Tu diseño, tu puzzle</div></div></div>
+          <div class="hero-card hero-card-3"><div class="hero-card-icon">📦</div><div class="hero-card-text"><div class="fw-bold">Envío Nacional</div><div class="small text-white-50">A todo México</div></div></div>
+          <div class="hero-mascot" id="heroMascot">
+            <img src="mascot.png" alt="Mascot Entretemente" class="mascot-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave"><svg viewBox="0 0 1440 60" fill="none"><path d="M0 60V30C240 0 480 0 720 30C960 60 1200 60 1440 30V60H0Z" fill="white"/></svg></div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products" class="section-products">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Catálogo</span>
+      <h2 class="display-6 fw-bold">Rompecabezas</h2>
+      <p class="text-muted col-lg-6 mx-auto">Diseños inspirados en la fauna, arte y cultura mexicana. MDF 3mm o 6mm.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🐆</div><h5>Jaguar</h5><span class="badge bg-warning text-dark mb-2">Medio · 12 pzas</span><p class="text-muted small">El rey de la selva mexicana en MDF pintado a mano.</p><div class="product-price">$<span class="product-price-value">450</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card product-card-featured"><div class="product-badge-featured">Popular</div><div class="product-icon-wrap">🦜</div><h5>Quetzal</h5><span class="badge bg-danger mb-2">Difícil · 16 pzas</span><p class="text-muted small">Ave sagrada con plumaje detallado. Nuestro best-seller.</p><div class="product-price">$<span class="product-price-value">550</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🦋</div><h5>Colibrí</h5><span class="badge bg-success mb-2">Fácil · 8 pzas</span><p class="text-muted small">Ideal para principiantes. Colores vibrantes mexicanos.</p><div class="product-price">$<span class="product-price-value">350</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🐉</div><h5>Alebrije</h5><span class="badge bg-warning text-dark mb-2">Medio · 14 pzas</span><p class="text-muted small">Criatura fantástica llena de patrones y colores.</p><div class="product-price">$<span class="product-price-value">520</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🌻</div><h5>Girasol</h5><span class="badge bg-warning text-dark mb-2">Medio · 12 pzas</span><p class="text-muted small">Campos de girasoles mexicanos con acabado mate.</p><div class="product-price">$<span class="product-price-value">420</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🗺️</div><h5>Mapa de México</h5><span class="badge bg-danger mb-2">Difícil · 20 pzas</span><p class="text-muted small">Silueta de la república con estados grabados en MDF.</p><div class="product-price">$<span class="product-price-value">600</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🦋</div><h5>Mariposa</h5><span class="badge bg-success mb-2">Fácil · 10 pzas</span><p class="text-muted small">Mariposa monarca. Diseño personalizable en color.</p><div class="product-price">$<span class="product-price-value">380</span> <span class="product-price-unit">MXN</span></div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="product-card"><div class="product-icon-wrap">🎴</div><h5>Lotería</h5><span class="badge bg-success mb-2">Fácil · 12 pzas</span><p class="text-muted small">Set de 4 puzzles con iconos clásicos de la lotería.</p><div class="product-price">$<span class="product-price-value">480</span> <span class="product-price-unit">MXN</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features-banner">
+  <div class="container">
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-tree"></i></div><div class="fw-semibold">MDF Premium</div><div class="small text-white-50">3mm y 6mm</div></div></div>
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-brush"></i></div><div class="fw-semibold">Pintado a Mano</div><div class="small text-white-50">Acrílico profesional</div></div></div>
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-truck"></i></div><div class="fw-semibold">Envío Nacional</div><div class="small text-white-50">A todo México</div></div></div>
+      <div class="col-6 col-md-3"><div class="feature-item"><div class="feature-icon"><i class="bi bi-palette"></i></div><div class="fw-semibold">100% Personalizable</div><div class="small text-white-50">Tu diseño o el nuestro</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ORDER FORM (demo data) ===== -->
+<section id="order" class="section-order">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Demo</span>
+      <h2 class="display-6 fw-bold">Haz tu Pedido</h2>
+      <p class="text-muted col-lg-6 mx-auto">Ejemplo de formulario — los datos no se envían</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="order-form-card p-4">
+          <div class="row g-3 mb-3">
+            <div class="col-md-6"><label class="form-label fw-semibold small">Nombre <span class="text-danger">*</span></label><input class="form-control form-control-lg" value="María García" disabled></div>
+            <div class="col-md-6"><label class="form-label fw-semibold small">Email <span class="text-danger">*</span></label><input class="form-control form-control-lg" value="maria@ejemplo.com" disabled></div>
+            <div class="col-md-6"><label class="form-label fw-semibold small">Teléfono</label><input class="form-control form-control-lg" value="555-987-6543" disabled></div>
+            <div class="col-md-6"><label class="form-label fw-semibold small">¿Personalización?</label><input class="form-control form-control-lg" value="Diseño estándar" disabled></div>
+          </div>
+          <fieldset class="border rounded-4 p-3 p-md-4 mb-3">
+            <legend class="float-none w-auto px-2 fw-semibold small">📍 Dirección de Envío</legend>
+            <div class="row g-3">
+              <div class="col-12"><input class="form-control" value="Calle Hidalgo 42, Col. Centro" disabled></div>
+              <div class="col-md-4"><input class="form-control" value="CDMX" disabled></div>
+              <div class="col-md-4"><input class="form-control" value="CDMX" disabled></div>
+              <div class="col-md-4"><input class="form-control" value="06000" disabled></div>
+            </div>
+          </fieldset>
+          <fieldset class="border rounded-4 p-3 p-md-4 mb-3">
+            <legend class="float-none w-auto px-2 fw-semibold small">🧩 Productos</legend>
+            <div class="d-flex justify-content-between mb-2"><span>1x Rompecabezas Quetzal (Difícil, 16 pzas)</span><strong>$550</strong></div>
+            <div class="d-flex justify-content-between mb-2"><span>1x Rompecabezas Colibrí (Fácil, 8 pzas)</span><strong>$350</strong></div>
+            <div class="d-flex justify-content-between mb-2"><span>Envío nacional</span><strong>$120</strong></div>
+            <div class="border-top pt-2 d-flex justify-content-between fw-bold"><span>Total Estimado</span><span class="text-accent">$1,020 MXN</span></div>
+          </fieldset>
+          <button class="btn btn-primary btn-lg rounded-pill w-100" onclick="new bootstrap.Modal(document.getElementById('orderFlowModal')).show()">Enviar Pedido (Demo)</button>
+          <p class="text-center text-muted small mt-2">Modo demo — formulario no funcional</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section-testimonials">
+  <div class="container">
+    <div class="text-center mb-5"><span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Testimonios</span><h2 class="display-6 fw-bold">Qué Dicen Nuestros Clientes</h2></div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="mt-2 mb-3">"Le regalé el puzzle de Quetzal a mi sobrina y quedó fascinada. La calidad de la madera y la pintura es increíble."</p><div class="d-flex align-items-center gap-2"><div class="testimonial-avatar">AG</div><div><div class="fw-semibold small">Ana García</div><div class="text-muted small">Cliente desde 2023</div></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="mt-2 mb-3">"Encargué un diseño personalizado con el logo de mi negocio para un evento corporativo. ¡Quedó perfecto!"</p><div class="d-flex align-items-center gap-2"><div class="testimonial-avatar">RL</div><div><div class="fw-semibold small">Roberto López</div><div class="text-muted small">Cliente desde 2024</div></div></div></div></div>
+      <div class="col-md-6 col-lg-4"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="mt-2 mb-3">"El rompecabezas de Alebrije es una obra de arte. Lo tengo enmarcado en mi sala y todos preguntan dónde lo compré."</p><div class="d-flex align-items-center gap-2"><div class="testimonial-avatar">CM</div><div><div class="fw-semibold small">Carmen Morales</div><div class="text-muted small">Cliente desde 2023</div></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section-contact">
+  <div class="container">
+    <div class="text-center mb-5"><span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-2">Contacto</span><h2 class="display-6 fw-bold">Contáctanos</h2></div>
+    <div class="row justify-content-center"><div class="col-auto">
+      <div class="d-flex flex-wrap justify-content-center gap-4 gap-md-5">
+        <div class="contact-item-card"><div class="contact-icon-wrap">📞</div><h6 class="text-muted small mb-0">WhatsApp</h6><p class="fw-semibold mb-0">+52 55 1234 5678</p></div>
+        <div class="contact-item-card"><div class="contact-icon-wrap">✉️</div><h6 class="text-muted small mb-0">Email</h6><p class="fw-semibold mb-0">hola@entretemente.com</p></div>
+        <div class="contact-item-card"><div class="contact-icon-wrap">📍</div><h6 class="text-muted small mb-0">Ubicación</h6><p class="fw-semibold mb-0">Ciudad de México, MX</p></div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-banner">
+  <div class="container text-center">
+    <h2 class="fw-bold text-white mb-2">¿Listo para tu rompecabezas?</h2>
+    <p class="text-white-50 mb-4">Cada puzzle es único, hecho a mano con materiales premium. Elige tu diseño o crea uno personalizado.</p>
+    <a href="#order" class="btn btn-primary btn-lg rounded-pill px-5 shadow-lg"><i class="bi bi-cart-plus me-1"></i> Hacer Pedido</a>
+  </div>
+</section>
+
+<!-- ===== ADMIN PANEL (hidden by default) ===== -->
+<div id="adminPanel">
+  <div style="background:#1c1917;padding:12px 0;color:#fff">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span><strong>🧩 Entretemente — Admin Panel</strong> <span class="demo-badge">Demo</span></span>
+      <button class="demo-btn demo-btn-out" onclick="logoutDemo()">✕ Salir</button>
+    </div>
+  </div>
+  <div class="container py-4">
+    <div class="row g-3 mb-4">
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">🧩 Pedidos Totales</div><div class="val">156</div></div></div>
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">💰 Revenue</div><div class="val">$72,840</div></div></div>
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">👥 Clientes</div><div class="val">63</div></div></div>
+      <div class="col-md-3"><div class="admin-stat"><div class="lbl">⏳ Pendientes</div><div class="val">8</div></div></div>
+    </div>
+    <div class="table-responsive mb-4">
+      <table class="table table-dark table-hover align-middle" style="--bs-table-bg:#292524;border-radius:12px;overflow:hidden">
+        <thead><tr><th>ID</th><th>Cliente</th><th>Productos</th><th>Total</th><th>Estado</th><th>Asignado</th><th>Fecha</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>#1056</td><td>María García</td><td>1x Quetzal, 1x Colibrí</td><td>$1,020</td><td><span class="badge bg-warning text-dark">Pendiente</span></td><td>—</td><td>9 Jun</td><td><div class="dropdown"><button class="btn btn-sm btn-outline-light rounded-pill dropdown-toggle" data-bs-toggle="dropdown">Acciones</button><ul class="dropdown-menu dropdown-menu-dark"><li><a class="dropdown-item" href="#" onclick="showAdminInfo('status')">Cambiar Estado</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('assign')">Asignar</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('notes')">Agregar Nota</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('priority')">Cambiar Prioridad</a></li></ul></div></td></tr>
+          <tr><td>#1055</td><td>Roberto López</td><td>2x Alebrije personalizados</td><td>$1,240</td><td><span class="badge bg-info">Procesando</span></td><td>Arturo</td><td>8 Jun</td><td><div class="dropdown"><button class="btn btn-sm btn-outline-light rounded-pill dropdown-toggle" data-bs-toggle="dropdown">Acciones</button><ul class="dropdown-menu dropdown-menu-dark"><li><a class="dropdown-item" href="#" onclick="showAdminInfo('status')">Cambiar Estado</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('assign')">Reasignar</a></li><li><a class="dropdown-item" href="#" onclick="showAdminInfo('notes')">Agregar Nota</a></li></ul></div></td></tr>
+          <tr><td>#1054</td><td>Carmen Morales</td><td>1x Mapa MX, 1x Lotería</td><td>$1,080</td><td><span class="badge bg-success">Completado</span></td><td>Arturo</td><td>5 Jun</td><td><button class="btn btn-sm btn-outline-light rounded-pill" onclick="showAdminInfo('view')">Ver</button></td></tr>
+          <tr><td>#1053</td><td>Cliente Demo D</td><td>3x Colibrí (regalo corporativo)</td><td>$1,050</td><td><span class="badge bg-primary">Enviado</span></td><td>Lucía</td><td>4 Jun</td><td><button class="btn btn-sm btn-outline-light rounded-pill" onclick="showAdminInfo('view')">Ver</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="admin-stat mb-4"><h6>📝 Actividad Reciente</h6>
+      <p class="text-secondary small mb-1">11:20 — Admin actualizó pedido #1056 a "Pendiente"</p>
+      <p class="text-secondary small mb-1">10:45 — Arturo comenzó producción del Alebrije personalizado #1055</p>
+      <p class="text-secondary small mb-1">09:15 — Nuevo pedido #1056: María García (1x Quetzal + 1x Colibrí)</p>
+      <p class="text-secondary small mb-0">Ayer — #1054 completado y entregado a Carmen Morales</p>
+    </div>
+
+    <h6 class="mb-3 text-white-50">⚙️ Funcionalidades del Sistema</h6>
+    <div class="row g-3 mb-3">
+      <div class="col-md-3"><div class="admin-feat-card" onclick="showAdminFeature('products')"><div class="admin-feat-icon">🧩</div><div class="admin-feat-title">Catálogo de Productos</div><div class="admin-feat-desc">Crear, editar y eliminar productos. Cargar imágenes, definir precios, categorías, dificultad y stock.</div><span class="badge bg-primary bg-opacity-15 text-primary rounded-pill">Clic para detalles</span></div></div>
+      <div class="col-md-3"><div class="admin-feat-card" onclick="showAdminFeature('custom')"><div class="admin-feat-icon">🎨</div><div class="admin-feat-title">Contenido Personalizado</div><div class="admin-feat-desc">Clientes suben sus imágenes, eligen colores y escriben instrucciones. Vista previa antes de producir.</div><span class="badge bg-primary bg-opacity-15 text-primary rounded-pill">Clic para detalles</span></div></div>
+      <div class="col-md-3"><div class="admin-feat-card" onclick="showAdminFeature('supervisors')"><div class="admin-feat-icon">👥</div><div class="admin-feat-title">Supervisores y Staff</div><div class="admin-feat-desc">Crear cuentas de supervisor, asignar pedidos, ver métricas por artesano y gestionar permisos.</div><span class="badge bg-primary bg-opacity-15 text-primary rounded-pill">Clic para detalles</span></div></div>
+      <div class="col-md-3"><div class="admin-feat-card" onclick="showAdminFeature('customers')"><div class="admin-feat-icon">👤</div><div class="admin-feat-title">Gestión de Clientes</div><div class="admin-feat-desc">Ver perfil completo, historial de pedidos, direcciones guardadas, notas internas por cliente.</div><span class="badge bg-primary bg-opacity-15 text-primary rounded-pill">Clic para detalles</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-dark text-white-50 text-center py-4">
+  <div class="container"><p class="mb-1 small">&copy; 2026 Entretemente. Rompecabezas artesanales mexicanos. Demo interactivo.</p></div>
+</footer>
+
+<!-- ===== MODALS ===== -->
+<div class="modal fade" id="orderFlowModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+    <div class="modal-header border-0"><h5 class="modal-title fw-bold">🧩 Flujo de Pedido</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body">
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">1</span><div><strong>Eliges tu diseño</strong><p class="text-muted small mb-0">Explora nuestro catálogo de rompecabezas o solicita un diseño personalizado con tu propia imagen o idea.</p></div></div>
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">2</span><div><strong>Datos de envío</strong><p class="text-muted small mb-0">Ingresas tu dirección completa. Hacemos envíos a todo México con seguimiento.</p></div></div>
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">3</span><div><strong>Producción artesanal</strong><p class="text-muted small mb-0">Cortamos, lijamos y pintamos a mano tu rompecabezas. Tiempo estimado: 3-5 días hábiles.</p></div></div>
+      <div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">4</span><div><strong>Pago</strong><p class="text-muted small mb-0">Transferencia, depósito o pago contra entrega. Recibes comprobante por email.</p></div></div>
+      <div class="d-flex align-items-start gap-3"><span class="badge bg-primary rounded-pill px-2">5</span><div><strong>Recibes tu puzzle</strong><p class="text-muted small mb-0">Empacado con cuidado. Recibes notificación de envío con número de rastreo.</p></div></div>
+    </div>
+    <div class="modal-footer border-0"><button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Entendido</button></div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="adminActionModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+    <div class="modal-header border-0"><h5 class="modal-title fw-bold" id="adminActionTitle">Acción</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body" id="adminActionBody"></div>
+    <div class="modal-footer border-0"><button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Entendido</button></div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="adminFeatureModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 shadow-lg rounded-4">
+    <div class="modal-header border-0"><h5 class="modal-title fw-bold" id="adminFeatureTitle"></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body" id="adminFeatureBody"></div>
+    <div class="modal-footer border-0"><button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Entendido</button></div>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function loginDemo(role) {
+  if (role === 'admin') { document.body.classList.add('show-admin'); }
+  document.getElementById('demoButtons').classList.add('d-none');
+  document.getElementById('logoutBtn').classList.remove('d-none');
+}
+function logoutDemo() {
+  document.body.classList.remove('show-admin');
+  document.getElementById('demoButtons').classList.remove('d-none');
+  document.getElementById('logoutBtn').classList.add('d-none');
+}
+function showAdminInfo(action) {
+  const t = document.getElementById('adminActionTitle');
+  const b = document.getElementById('adminActionBody');
+  const info = {
+    status: { title: 'Cambiar Estado', body: '<p>Flujo de estados del pedido:</p><div class="d-flex gap-2 mb-2 flex-wrap"><span class="badge bg-warning text-dark">Pendiente</span> → <span class="badge bg-info">Procesando</span> → <span class="badge bg-primary">Enviado</span> → <span class="badge bg-success">Completado</span></div><p class="text-muted small">Solo admin y el artesano asignado pueden cambiar el estado. Cada cambio queda registrado en las notas del pedido.</p><p class="text-muted small mb-0"><strong>Cancelado:</strong> solo admin puede cancelar. Pedidos completados no se pueden modificar.</p>' },
+    assign: { title: 'Asignar Pedido', body: '<p class="text-muted small">El admin asigna cada pedido a un artesano del equipo.</p><p class="text-muted small">Cada artesano solo ve y gestiona los pedidos que tiene asignados. El admin puede reasignar en cualquier momento.</p><p class="text-muted small mb-0"><strong>Auto-asignación:</strong> cuando un artesano cambia un pedido de Pendiente a Procesando, se le asigna automáticamente.</p>' },
+    notes: { title: 'Notas Internas', body: '<p class="text-muted small">Las notas son visibles solo para admin y artesanos. El cliente no las ve.</p><p class="text-muted small">Cada acción (cambio de estado, asignación, prioridad) genera una nota automática con fecha, hora y usuario.</p><p class="text-muted small mb-0">Se pueden agregar notas manuales: "cliente pidió cambio de color", "usar MDF 6mm en vez de 3mm", "entregar antes del viernes".</p>' },
+    priority: { title: 'Prioridad', body: '<div class="d-flex gap-2 mb-2"><span class="badge bg-success">Normal</span> <span class="badge bg-warning text-dark">Importante</span> <span class="badge bg-danger">Urgente</span></div><p class="text-muted small">El admin o artesano pueden cambiar la prioridad. Los pedidos urgentes aparecen primero en el dashboard.</p><p class="text-muted small mb-0">La prioridad ayuda a organizar la producción. No afecta al cliente.</p>' },
+    view: { title: 'Ver Pedido', body: '<p class="text-muted small">Vista completa del pedido: datos del cliente, dirección de envío, productos, total, historial de estados y notas internas.</p><p class="text-muted small">Desde aquí se puede cambiar estado, asignar, agregar notas y cambiar prioridad.</p><p class="text-muted small mb-0"><strong>Pedidos completados:</strong> solo lectura. No se pueden modificar.</p>' },
+  }[action];
+  if (t && b && info) { t.textContent = info.title; b.innerHTML = info.body; new bootstrap.Modal(document.getElementById('adminActionModal')).show(); }
+}
+function showAdminFeature(feature) {
+  const t = document.getElementById('adminFeatureTitle');
+  const b = document.getElementById('adminFeatureBody');
+  const data = {
+    products: { title: '🧩 Catálogo de Productos', body: '<p class="fw-semibold">Gestión completa del catálogo desde el panel admin.</p><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">1</span><div><strong>Crear producto</strong><p class="text-muted small mb-0">Nombre, descripción, categoría, precio, dificultad, número de piezas, dimensiones y material. Subida de imagen con preview instantáneo.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">2</span><div><strong>Editar y actualizar</strong><p class="text-muted small mb-0">Modifica cualquier campo en cualquier momento. Cambia imágenes, precios o descripciones. Los cambios se reflejan al instante en la tienda.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">3</span><div><strong>Gestionar stock</strong><p class="text-muted small mb-0">Control de inventario con alertas de stock bajo. Marca productos como agotados o destacados. Los clientes solo ven productos disponibles.</p></div></div><div class="d-flex align-items-start gap-3"><span class="badge bg-primary rounded-pill px-2">4</span><div><strong>Organizar catálogo</strong><p class="text-muted small mb-0">Categorías personalizables (fauna, arte, educativos, naturaleza). Filtros por dificultad y precio. Productos destacados aparecen primero.</p></div></div>' },
+    custom: { title: '🎨 Contenido Personalizado', body: '<p class="fw-semibold">Los clientes pueden encargar rompecabezas totalmente personalizados.</p><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">1</span><div><strong>Subida de imágenes</strong><p class="text-muted small mb-0">El cliente sube su propia imagen (foto, logo, ilustración). Formatos: JPG, PNG, WebP. Vista previa automática con dimensiones del puzzle.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">2</span><div><strong>Instrucciones personalizadas</strong><p class="text-muted small mb-0">Campo de texto libre: "quiero fondo azul marino con detalles dorados", "solo la silueta del perro", "agregar texto: Felicidades Mamá".</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">3</span><div><strong>Revisión y aprobación</strong><p class="text-muted small mb-0">El artesano revisa la imagen y las instrucciones. Puede aprobar, solicitar cambios o rechazar si la calidad de imagen no es suficiente.</p></div></div><div class="d-flex align-items-start gap-3"><span class="badge bg-primary rounded-pill px-2">4</span><div><strong>Producción</strong><p class="text-muted small mb-0">Una vez aprobado, el diseño se adapta al formato del puzzle. El cliente recibe una notificación cuando entra a producción.</p></div></div>' },
+    supervisors: { title: '👥 Supervisores y Staff', body: '<p class="fw-semibold">Sistema de delegación con roles y permisos.</p><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">1</span><div><strong>Crear supervisores</strong><p class="text-muted small mb-0">El admin crea cuentas para artesanos y supervisores. Cada uno recibe acceso con email y contraseña. Rol "supervisor": acceso al panel de pedidos asignados.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">2</span><div><strong>Asignar pedidos</strong><p class="text-muted small mb-0">Cada pedido se asigna a un artesano específico. Auto-asignación: al cambiar un pedido a "Procesando", se asigna automáticamente al supervisor que hizo el cambio.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">3</span><div><strong>Métricas por artesano</strong><p class="text-muted small mb-0">Dashboard con pedidos completados, en proceso, tiempo promedio de entrega y revenue generado por cada miembro del equipo.</p></div></div><div class="d-flex align-items-start gap-3"><span class="badge bg-primary rounded-pill px-2">4</span><div><strong>Control de acceso</strong><p class="text-muted small mb-0">Los supervisores solo ven pedidos asignados a ellos. No pueden ver clientes, finanzas ni otros supervisores. El admin tiene acceso total.</p></div></div>' },
+    customers: { title: '👤 Gestión de Clientes', body: '<p class="fw-semibold">Perfil completo de cada cliente con historial y datos de contacto.</p><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">1</span><div><strong>Ficha del cliente</strong><p class="text-muted small mb-0">Nombre, email, teléfono, fecha de registro. Múltiples direcciones guardadas (casa, oficina, regalo). Notas internas visibles solo para admin.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">2</span><div><strong>Historial de pedidos</strong><p class="text-muted small mb-0">Todos los pedidos del cliente con estados, fechas, productos, totales y artesano asignado. Búsqueda y filtros por fecha o estado.</p></div></div><div class="d-flex align-items-start gap-3 mb-3"><span class="badge bg-primary rounded-pill px-2">3</span><div><strong>Pedidos recurrentes</strong><p class="text-muted small mb-0">Detecta clientes frecuentes. El admin puede aplicar descuentos por volumen o fidelidad. Sugerencias de productos basadas en compras anteriores.</p></div></div><div class="d-flex align-items-start gap-3"><span class="badge bg-primary rounded-pill px-2">4</span><div><strong>Comunicación</strong><p class="text-muted small mb-0">El cliente recibe confirmación por email al crear el pedido. Notificaciones en cada cambio de estado. Puede ver sus pedidos desde "Mis Pedidos" en la tienda.</p></div></div>' }
+  };
+  const info = data[feature];
+  if (t && b && info) { t.textContent = info.title; b.innerHTML = info.body; new bootstrap.Modal(document.getElementById('adminFeatureModal')).show(); }
+}
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('navbar-scrolled', window.scrollY > 60);
+});
+// Nav links: auto-logout when in admin view so sections are visible
+document.querySelectorAll('.nav-link-custom').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    if (document.body.classList.contains('show-admin')) {
+      logoutDemo();
+      setTimeout(function() {
+        var target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
+  });
+});
+// Hero parallax
+(function() {
+  const v = document.querySelector('.hero-visual');
+  if (!v) return;
+  const c = v.querySelectorAll('.hero-card');
+  v.addEventListener('mousemove', e => {
+    const r = v.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+    const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+    c.forEach((card, i) => { const f = 8 + i * 4; card.style.setProperty('--mx', `${dx * f}px`); card.style.setProperty('--my', `${dy * f}px`); });
+  });
+  v.addEventListener('mouseleave', () => c.forEach(card => { card.style.setProperty('--mx', '0px'); card.style.setProperty('--my', '0px'); }));
+})();
+</script>
+</body>
+</html>
